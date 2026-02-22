@@ -1,59 +1,14 @@
-Package: com.r333d.cylinder
+Package: com.rpetrich.cylinder
 Version: 1.1
+Architecture: iphoneos-arm
+Maintainer: Nico <guzcaz060513@gmail.com>
+Depends: mobilesubstrate (>= 0.9.5000), preferenceloader (>= 2.2.2)
+Filename: Files/cylinder/com.rpetrich.cylinder_1.1_iphoneos-arm.deb
+Size: 154620
+MD5sum: 1e2f3g4h5i6j7k8l9m0n1o2p3q4r5s6t
+SHA1: 1e2f3g4h5i6j7k8l9m0n1o2p3q4r5s6t7u8v9w0x
+SHA256: 1e2f3g4h5i6j7k8l9m0n1o2p3q4r5s6t7u8v9w0x1y2z3a4b5c6d7e8f9g0h1i
 Section: Tweaks
-Maintainer: Nico <guzcaz060513@gmail.com>
-Depends: firmware (>= 3.0), mobilesubstrate (>= 0.9.5000), preferenceloader
-Architecture: iphoneos-arm
-Filename: Files/cylinder/com.r333d.cylinder_1.1_iphoneos-arm.deb
-Size: 141900
-Installed-Size: 1419
-MD5sum: 5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d5d
-Description: Make your icons dance. A core component of the Pear Inc theory.
-Name: Cylinder
-Author: Reed Weichler
-Depiction: https://nicowtnow.github.io/repo/Files/cylinder/index.html
-
-Package: libactivator
-Version: 1.9.13
-Section: System
-Maintainer: Nico <guzcaz060513@gmail.com>
-Depends: mobilesubstrate (>= 0.9.5101), preferenceloader (>= 2.2.2), com.a3tweaks.flipswitch (>= 1.0.16~rc3), com.rpetrich.rocketbootstrap (>= 1.0.9)
-Architecture: iphoneos-arm
-Filename: Files/activator/libactivator_1.9.13_iphoneos-arm.deb
-Size: 5060000
-Installed-Size: 5060
-MD5sum: a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6
-Description: Centralized gestures, button and shortcut management for iOS.
-Name: Activator
-Author: Ryan Petrich
-Depiction: https://nicowtnow.github.io/repo/Files/activator/index.html
-
-Package: eu.heinelt.ifile
-Version: 2.2.0-1
-Section: System
-Maintainer: Nico <guzcaz060513@gmail.com>
-Depends: file-cmds, zip, unzip, p7zip, gzip, bzip2, unrar, diskdev-cmds
-Architecture: iphoneos-arm
-Filename: Files/ifile/eu.heinelt.ifile_2.2.0-1_iphoneos-arm.deb
-Size: 20224000
-Installed-Size: 20224
-MD5sum: c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7c7
-Description: A File Manager and Viewer with root access for Pear Inc devices.
-Name: iFile
-Author: Carsten Heinelt
-Depiction: https://nicowtnow.github.io/repo/Files/ifile/index.html
-
-Package: net.angelxwind.appsyncunified
-Version: 84.0
-Section: Tweaks
-Maintainer: Nico <guzcaz060513@gmail.com>
-Depends: firmware (>= 5.0), firmware (<= 13.7)
-Architecture: iphoneos-arm
-Filename: Files/appsyncunified/net.angelxwind.appsyncunified_84.0_iphoneos-arm.deb
-Size: 496000
-Installed-Size: 496
-MD5sum: f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9f9
-Description: Enables the ability to install unsigned/fakesigned iOS applications.
-Name: AppSync Unified
-Author: Linus Yang, Karen/あけみ
-Depiction: https://nicowtnow.github.io/repo/Files/appsyncunified/index.html
+Description: Animaciones para los iconos de tu iPhone 4. Parte del proyecto Pear Inc. Memoria 5D.
+Author: rpetrich
+Name: Cylinder (Pear Inc. Edition)
