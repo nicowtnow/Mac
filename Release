@@ -1,0 +1,8 @@
+Origin: Pear Inc.
+Label: Pear Inc.
+Suite: stable
+Version: 1.0
+Codename: Memoria5D
+Architectures: iphoneos-arm
+Components: main
+Description: Repositorio para la preservación y gestión de paquetes .deb en sistemas iOS Legacy. Proyecto de Nico para el desarrollo de la Inteligencia Universal.
