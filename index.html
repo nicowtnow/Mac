@@ -2,191 +2,163 @@
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <title>Pear Inc. - Repositorio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pear Inc. - Universal Repo</title>
     <style>
         body { 
             background: linear-gradient(to bottom, #003366 0%, #001a33 100%);
             background-attachment: fixed;
             color: #ffffff; 
-            font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, sans-serif; 
-            margin: 0; padding: 0; min-height: 100vh; overflow-x: hidden;
+            font-family: "Lucida Grande", sans-serif; 
+            margin: 0; padding: 0; min-height: 100vh;
         }
 
-        /* Barra Apple 2010 */
         #navbar {
             background: linear-gradient(to bottom, #454545 0%, #111111 100%);
             height: 44px; border-bottom: 1px solid #000;
             display: flex; align-items: center; padding: 0 15px;
+            position: sticky; top: 0; z-index: 1000;
         }
 
         .apple-icon { font-size: 20px; color: white; margin-right: 15px; }
-
         #navbar ul { list-style: none; margin: 0; padding: 0; display: flex; flex: 1; height: 100%; }
-
         #navbar li {
             flex: 1; text-align: center; line-height: 44px;
             color: #ccc; font-size: 11px; font-weight: bold;
-            cursor: pointer; border-right: 1px solid #333; transition: 0.2s;
+            cursor: pointer; border-right: 1px solid #333;
         }
-
-        #navbar li:hover { background: rgba(255,255,255,0.1); color: #fff; }
         #navbar li.active { background: linear-gradient(to bottom, #111111 0%, #444 100%); color: #fff; border-bottom: 2px solid #ffffff; }
 
         #main-container { 
-            max-width: 650px; margin: 50px auto; padding: 30px;
+            max-width: 600px; margin: 40px auto; padding: 25px;
             background: rgba(255, 255, 255, 0.05);
             border-radius: 12px; border: 1px solid rgba(255,255,255,0.2);
             box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            text-align: center;
         }
 
-        .section { display: none; text-align: center; }
+        .section { display: none; }
         .section.active { display: block; }
 
         .log-box { 
-            background: rgba(0,0,0,0.3); border: 1px solid #ffffff;
-            padding: 25px; margin: 25px 0; border-radius: 10px;
+            background: rgba(0,0,0,0.3); border: 2px solid #ffffff;
+            padding: 25px; margin: 20px 0; border-radius: 10px;
         }
-        .count-num { font-size: 48px; font-weight: bold; color: #39FF14; font-family: monospace; }
-        .www-box { font-size: 13px; color: #58a6ff; margin-top: 10px; font-family: monospace; }
-
-        /* Mensaje Flotante */
+        .count-num { font-size: 55px; font-weight: bold; color: #39FF14; font-family: 'Courier New', monospace; text-shadow: 0 0 10px #39FF14; }
+        
         #toast {
-            display: none; position: fixed; bottom: 100px; left: 50%;
-            transform: translateX(-50%); background: rgba(255,255,255,0.9);
-            color: #000; padding: 10px 20px; border-radius: 20px;
-            font-size: 12px; font-weight: bold; z-index: 2000;
+            display: none; position: fixed; top: 60px; left: 50%;
+            transform: translateX(-50%); background: #ffffff; color: #000;
+            padding: 10px 20px; border-radius: 20px; font-size: 13px; font-weight: bold; z-index: 2000;
         }
 
         footer { text-align: center; padding: 40px 0; }
-        .nico-credit { 
-            color: #444; font-size: 10px; letter-spacing: 1px; 
-            cursor: pointer; display: inline-block; user-select: none;
-        }
-
-        /* Modal MIT */
-        #modal-mit {
-            display: none; position: fixed; top: 50%; left: 50%;
-            transform: translate(-50%, -50%); width: 85%; max-width: 500px;
-            background: #f0f0f0; color: #111; padding: 25px; border-radius: 8px; z-index: 1000;
-        }
-        #overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8); z-index: 999;
-        }
+        .nico-credit { color: #666; font-size: 11px; cursor: pointer; padding: 10px; }
     </style>
 </head>
 <body>
 
-<div id="overlay" onclick="cerrarMIT()"></div>
-<div id="toast"></div>
+<div id="toast">SINCRONIZACIÓN UNIVERSAL</div>
 
 <div id="navbar">
     <div class="apple-icon"></div>
     <ul>
         <li id="tab-5d" onclick="showSection('5d')">5D</li>
         <li id="tab-pear" onclick="showSection('pear')">Pear</li>
-        <li id="tab-cydia" class="active" onclick="showSection('cydia')">Cydia y Repo</li>
-        <li id="tab-xt" onclick="showSection('xt')">Pearphone XT</li>
-        <li style="border-right: none;">Book</li>
+        <li id="tab-cydia" class="active" onclick="showSection('cydia')">Cydia</li>
+        <li id="tab-xt" onclick="showSection('xt')">XT</li>
     </ul>
 </div>
 
 <div id="main-container">
     <div id="sec-cydia" class="section active">
-        <h2>Servidor Pear Inc.</h2>
+        <h2>Repo Pear Inc.</h2>
         <div class="log-box">
-            <p style="font-size: 10px; color: #ffffff; margin: 0; letter-spacing: 2px;">PETICIONES DESDE CYDIA</p>
-            <span id="contador-dinamico" class="count-num">---</span>
-            <div class="www-box">CONEXIÓN CON WWW: <span id="count-www">38</span></div>
+            <p style="font-size: 10px; color: #aaa; margin: 0; letter-spacing: 2px;">LIVE SERVER REQUESTS</p>
+            <div id="contador-dinamico" class="count-num">---</div>
+            <p style="font-size: 11px; color: #39FF14; margin: 5px 0 0 0;">MODO: TIEMPO ACELERADO</p>
         </div>
-        <p style="font-size: 12px; color: #ccc;"><b>Repo:</b> https://nicowtnow.github.io/Mac/</p>
+        <p style="font-size: 12px; color: #888;">Repo: nicowtnow.github.io/Mac/</p>
     </div>
 
     <div id="sec-pear" class="section">
-        <h2>Visión Corporativa</h2>
-        <button onclick="abrirMIT()" style="margin-top:20px; padding: 10px 20px; cursor: pointer; background: #fff; color: #000; border: none; font-weight: bold; border-radius: 4px;">VER LICENCIA MIT</button>
+        <h2>Corporación Pear Inc.</h2>
+        <p style="font-size: 13px; text-align: justify; line-height: 1.6;">Desarrollo de <b>theztap</b> y el OS de Pearphone en C++. Basado en la teoría del Teseracto.</p>
     </div>
 
     <div id="sec-5d" class="section">
-        <h2 style="font-size: 22px;">Teoría de la Memoria 5D</h2>
-        <p style="text-align: justify; font-size: 14px; font-style: italic;">"La sabiduría es información auto-impuesta, no externa..."</p>
+        <h2>Memoria 5D</h2>
+        <p style="font-size: 14px; font-style: italic; text-align: justify; border-left: 3px solid #39FF14; padding-left: 15px;">
+            "La sabiduría es información auto-impuesta, no externa."
+        </p>
     </div>
 
     <div id="sec-xt" class="section">
-        <h2>Desarrollo XT</h2>
-        <p style="font-size: 13px;">Pear OS (C++) & Theztap App (Xcode/Swift)</p>
+        <h2>Pearphone XT</h2>
+        <p style="font-size: 13px;">Kernel: <b>C++ (PearCore)</b></p>
     </div>
-</div>
-
-<div id="modal-mit">
-    <h3 style="margin-top: 0;">MIT LICENSE</h3>
-    <div style="font-size: 10px; height: 150px; overflow-y: scroll; background: #fff; padding: 10px; border: 1px solid #ccc; text-align: left;">
-        Copyright (c) 2026 Pear Inc. - Nico...
-    </div>
-    <p align="center"><button onclick="cerrarMIT()" style="margin-top: 15px;">CERRAR</button></p>
 </div>
 
 <footer>
-    <div class="nico-credit" onclick="toggleTurbo()">
-        &copy; 2026 Pear Inc. - Nico 2026
+    <div class="nico-credit" onclick="triggerMagic()">
+        &copy; 2026 Pear Inc. - <b>Nico 2026</b>
     </div>
 </footer>
 
+<script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database-compat.js"></script>
+
 <script type="text/javascript">
-    let turboMode = false;
-    const basePeticiones = 277;
+    const firebaseConfig = {
+      apiKey: "AIzaSyDtV17bKSfJ_shwkRCxipRoPuxcZNL7o3k",
+      authDomain: "pearserver-f8a0e.firebaseapp.com",
+      databaseURL: "https://pearserver-f8a0e-default-rtdb.firebaseio.com",
+      projectId: "pearserver-f8a0e",
+      storageBucket: "pearserver-f8a0e.appspot.com",
+      messagingSenderId: "34841932085", 
+      appId: "1:34841932085:web:96610f04b7ae4e8cca9c7c"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+    const serverRef = database.ref('servidor');
     const patronSuma = [44, 72, 25, 83];
 
-    function showSection(sectionId) {
+    // Escuchar la nube (Sincronización en tiempo real)
+    serverRef.on('value', (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+            document.getElementById('contador-dinamico').innerText = data.peticiones;
+        } else {
+            serverRef.set({ peticiones: 277, index: 0 });
+        }
+    });
+
+    // Función de suma automática cada 30 segundos (Sin reinicio)
+    setInterval(() => {
+        serverRef.transaction((currentData) => {
+            if (currentData) {
+                let n = parseInt(currentData.peticiones) + patronSuma[currentData.index % patronSuma.length];
+                if (n >= 1000) n = 277; // Big Grand Reset
+                currentData.peticiones = n;
+                currentData.index = (currentData.index + 1) % patronSuma.length;
+            }
+            return currentData;
+        });
+    }, 30000);
+
+    function triggerMagic() {
+        const toast = document.getElementById('toast');
+        toast.style.display = 'block';
+        setTimeout(() => { toast.style.display = 'none'; }, 2000);
+    }
+
+    function showSection(id) {
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
         document.querySelectorAll('#navbar li').forEach(t => t.classList.remove('active'));
-        document.getElementById('sec-' + sectionId).classList.add('active');
-        document.getElementById('tab-' + (sectionId === 'xt' ? 'xt' : sectionId)).classList.add('active');
+        document.getElementById('sec-' + id).classList.add('active');
+        document.getElementById('tab-' + id).classList.add('active');
     }
-
-    function toggleTurbo() {
-        turboMode = !turboMode;
-        const toast = document.getElementById('toast');
-        toast.innerHTML = turboMode ? "Tiempo activado" : "Tiempo desactivado";
-        toast.style.display = 'block';
-        
-        setTimeout(() => { toast.style.display = 'none'; }, 2000);
-        actualizarContadores();
-    }
-
-    function abrirMIT() { document.getElementById('modal-mit').style.display = 'block'; document.getElementById('overlay').style.display = 'block'; }
-    function cerrarMIT() { document.getElementById('modal-mit').style.display = 'none'; document.getElementById('overlay').style.display = 'none'; }
-
-    function actualizarContadores() {
-        // WWW (+1 cada recarga)
-        let visitas = parseInt(localStorage.getItem('www_visitas') || 38);
-        if(!window.visitaContada) {
-            visitas++;
-            localStorage.setItem('www_visitas', visitas);
-            window.visitaContada = true;
-        }
-        document.getElementById('count-www').innerHTML = visitas;
-
-        // Lógica de Servidor
-        const ahora = new Date();
-        const minutosTotales = (ahora.getHours() * 60) + ahora.getMinutes();
-        
-        // Si turboMode es true, cuenta cada 1 minuto. Si no, cada 4 horas (240 min).
-        const intervalo = turboMode ? 1 : 240; 
-        const bloques = Math.floor(minutosTotales / intervalo);
-        
-        let total = basePeticiones;
-        for (let i = 0; i < bloques; i++) {
-            total += patronSuma[i % patronSuma.length];
-        }
-        
-        document.getElementById('contador-dinamico').innerHTML = total;
-    }
-
-    // Actualizar cada segundo para que el modo turbo se note al instante
-    setInterval(actualizarContadores, 1000);
-    actualizarContadores();
 </script>
-
 </body>
 </html>
