@@ -1,49 +1,83 @@
 Package: com.rpetrich.cylinder
 Version: 1.1
 Architecture: iphoneos-arm
-Maintainer: Nico <guzcaz060513@gmail.com>
 Filename: Files/cylinder.deb
-Size: 154620
 Section: Tweaks
-Description: Animaciones 3D para tus iconos. El pilar de Pear Inc.
 Name: Cylinder
 
 Package: com.alexzielenski.zeppelin
 Version: 2.1.0-12
 Architecture: iphoneos-arm
-Maintainer: Nico <guzcaz060513@gmail.com>
 Filename: Files/zeppelin.deb
-Size: 450000
 Section: Tweaks
-Description: Cambia el logo del operador. Identidad universal.
 Name: Zeppelin
 
 Package: com.aaronash.barrel
 Version: 1.8.1.1-1
 Architecture: iphoneos-arm
-Maintainer: Nico <guzcaz060513@gmail.com>
 Filename: Files/barrel.deb
-Size: 320000
 Section: Tweaks
-Description: El tweak original de transiciones de iconos.
 Name: Barrel
 
-Package: com.spark.snowboard
-Version: 1.5.21-beta1
+Package: com.invoxiplaygames.ytclassic
+Version: 1.0
 Architecture: iphoneos-arm
-Maintainer: Nico <guzcaz060513@gmail.com>
-Filename: Files/snowboard.deb
-Size: 850000
+Filename: Files/ytclassic.deb
 Section: Tweaks
-Description: Motor de temas para la interfaz de Pear Inc.
-Name: SnowBoard
+Name: Classic YouTube App
 
-Package: eu.heinelt.ifile
-Version: 1.9.1-1
+Package: com.invoxiplaygames.checkmatestore
+Version: 1.0.3
 Architecture: iphoneos-arm
-Maintainer: Nico <guzcaz060513@gmail.com>
-Filename: Files/ifile.deb
-Size: 2100000
-Section: Utilities
-Description: Explorador de archivos para gestionar tu teseracto.
-Name: iFile
+Filename: Files/checkmate.deb
+Section: Tweaks
+Name: Checkmate, Store!
+
+Package: com.invoxiplaygames.simalertsuppression
+Version: 1.0.0
+Architecture: iphoneos-arm
+Filename: Files/simalert.deb
+Section: Tweaks
+Name: Sim Alert Suppression
+
+Package: com.thireus.sslkillswitch
+Version: 0.5
+Architecture: iphoneos-arm
+Filename: Files/sslkillswitch.deb
+Section: Security
+Name: iOS SSL Kill Switch
+
+Package: com.jarxy.easyfirewall
+Version: 1.0
+Architecture: iphoneos-arm
+Filename: Files/firewall.deb
+Section: Security
+Name: Easy Firewall
+
+Package: com.jarxy.ultrasnow
+Version: 1.2.4
+Architecture: iphoneos-arm
+Filename: Files/ultrasnow.deb
+Section: Carrier
+Name: UltraSn0w 1.2.4
+
+Package: com.julioverne.lowerinstall
+Version: 0.0~beta3
+Architecture: iphoneos-arm
+Filename: Files/lowerinstall.deb
+Section: Tweaks
+Name: LowerInstall
+
+Package: com.satouaoi.appstorefix
+Version: 1.0
+Architecture: iphoneos-arm
+Filename: Files/appstorefix.deb
+Section: Fixes
+Name: AppStore Fix
+
+Package: com.electimon.bagxml
+Version: 1.0
+Architecture: iphoneos-arm
+Filename: Files/bagxml.deb
+Section: Configuration
+Name: Bag.xml
