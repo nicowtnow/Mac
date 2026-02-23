@@ -25,11 +25,17 @@
         }
         #navbar li.active { background: linear-gradient(to bottom, #111111 0%, #444 100%); color: #fff; }
 
-        /* MONITOR DISCRETO EN LA BARRA */
-        #monitor-top {
-            width: 70px; text-align: center; color: #39FF14;
-            font-family: monospace; font-size: 10px; border-left: 1px solid #333;
-            height: 44px; line-height: 44px; background: rgba(0,0,0,0.3);
+        /* BOTÓN INVISIBLE EN LA BARRA */
+        #monitor-trigger {
+            width: 50px; height: 44px; cursor: pointer; border-left: 1px solid #333;
+        }
+
+        /* VENTANA FLOTANTE PEQUEÑA */
+        #monitor-popup {
+            display: none; position: fixed; top: 50px; right: 10px;
+            background: #000; color: #39FF14; border: 1px solid #39FF14;
+            padding: 8px 12px; border-radius: 5px; font-family: monospace;
+            font-size: 12px; z-index: 2000; box-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
         }
 
         #main-container { 
@@ -38,15 +44,13 @@
             border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 15px 35px rgba(0,0,0,0.4);
             text-align: center;
         }
-        .section { display: none; }
-        .section.active { display: block; }
         .log-box { 
             background: rgba(0,0,0,0.3); border: 2px solid #ffffff;
             padding: 25px; margin: 20px 0; border-radius: 10px;
         }
         .count-num { font-size: 55px; font-weight: bold; color: #39FF14; font-family: 'Courier New', monospace; text-shadow: 0 0 10px #39FF14; }
         
-        #toast {
+        #toast-nico {
             display: none; position: fixed; top: 60px; left: 50%;
             transform: translateX(-50%); background: #ffffff; color: #000;
             padding: 10px 20px; border-radius: 20px; font-size: 12px; font-weight: bold; z-index: 2000;
@@ -58,7 +62,8 @@
 </head>
 <body>
 
-<div id="toast">Aquí no está</div>
+<div id="toast-nico">Aquí no está</div>
+<div id="monitor-popup" onclick="this.style.display='none'">---</div>
 
 <div id="navbar">
     <div class="apple-icon"></div>
@@ -68,7 +73,7 @@
         <li id="tab-cydia" class="active" onclick="showSection('cydia')">Cydia</li>
         <li id="tab-xt" onclick="showSection('xt')">XT</li>
     </ul>
-    <div id="monitor-top">---</div>
+    <div id="monitor-trigger" onclick="toggleMonitor()"></div>
 </div>
 
 <div id="main-container">
@@ -84,13 +89,12 @@
         <h2>Memoria 5D</h2>
         <p style="font-size: 14px; font-style: italic;">"La sabiduría es información auto-impuesta."</p>
     </div>
-
-    <div id="sec-pear" class="section"><h2>Pear Inc.</h2><p>Desarrollo de hardware y software 5D.</p></div>
-    <div id="sec-xt" class="section"><h2>XT</h2><p>Sistema Operativo C++.</p></div>
+    <div id="sec-pear" class="section"><h2>Pear Inc.</h2><p>Hardware del futuro.</p></div>
+    <div id="sec-xt" class="section"><h2>XT</h2><p>Kernel 5D.</p></div>
 </div>
 
 <footer>
-    <div class="nico-credit" onclick="triggerSecret()">
+    <div class="nico-credit" onclick="triggerNico()">
         &copy; 2026 Pear Inc. - <b>Nico 2026</b>
     </div>
 </footer>
@@ -117,6 +121,7 @@
     let rondasRapidas = 0;
     let tiempoRestante = 0;
     let timerInterval;
+    let monitorTexto = "";
 
     serverRef.on('value', (snapshot) => {
         const data = snapshot.val();
@@ -128,15 +133,12 @@
         let prefijo = "";
 
         if (rondasRapidas < 2) {
-            // RS1 y RS2
             prefijo = "RS" + (rondasRapidas + 1) + " ";
-            tiempoEspera = Math.floor(Math.random() * (20000)) + 15000;
+            tiempoEspera = Math.floor(Math.random() * 15000) + 15000;
         } else if (rondasRapidas === 2) {
-            // RS3 (Solo tiempo, sin texto)
             prefijo = "";
-            tiempoEspera = Math.floor(Math.random() * (20000)) + 15000;
+            tiempoEspera = Math.floor(Math.random() * 15000) + 15000;
         } else {
-            // RL (2 min)
             prefijo = "RL ";
             tiempoEspera = 120000;
         }
@@ -147,7 +149,13 @@
         timerInterval = setInterval(() => {
             tiempoRestante -= 1000;
             let seg = Math.ceil(tiempoRestante / 1000);
-            document.getElementById('monitor-top').innerText = prefijo + seg + "s";
+            monitorTexto = prefijo + seg + "s";
+            
+            // Actualizar la ventana si está abierta
+            const popup = document.getElementById('monitor-popup');
+            if (popup.style.display === 'block') {
+                popup.innerText = monitorTexto;
+            }
 
             if (tiempoRestante <= 0) {
                 clearInterval(timerInterval);
@@ -166,16 +174,26 @@
             }
             return currentData;
         }, () => {
-            rondasRapidas = (rondasRapidas + 1) % 4; // 0,1,2 son rápidas, 3 es larga
+            rondasRapidas = (rondasRapidas + 1) % 4;
             iniciarCiclo();
         });
     }
 
-    function triggerSecret() {
-        const toast = document.getElementById('toast');
-        toast.innerText = "Aquí no está";
-        toast.style.display = 'block';
-        setTimeout(() => { toast.style.display = 'none'; }, 2000);
+    // FUNCIÓN DEL MONITOR SECRETO
+    function toggleMonitor() {
+        const popup = document.getElementById('monitor-popup');
+        if (popup.style.display === 'block') {
+            popup.style.display = 'none';
+        } else {
+            popup.innerText = monitorTexto;
+            popup.style.display = 'block';
+        }
+    }
+
+    function triggerNico() {
+        const t = document.getElementById('toast-nico');
+        t.style.display = 'block';
+        setTimeout(() => { t.style.display = 'none'; }, 2000);
     }
 
     function showSection(id) {
