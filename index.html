@@ -9,9 +9,10 @@
             background-attachment: fixed;
             color: #ffffff; 
             font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, sans-serif; 
-            margin: 0; padding: 0; min-height: 100vh;
+            margin: 0; padding: 0; min-height: 100vh; overflow-x: hidden;
         }
 
+        /* Barra Apple 2010 con divisiones */
         #navbar {
             background: linear-gradient(to bottom, #454545 0%, #111111 100%);
             height: 44px; border-bottom: 1px solid #000;
@@ -25,9 +26,10 @@
         #navbar li {
             flex: 1; text-align: center; line-height: 44px;
             color: #ccc; font-size: 11px; font-weight: bold;
-            cursor: pointer; border-right: 1px solid #333;
+            cursor: pointer; border-right: 1px solid #333; transition: 0.2s;
         }
 
+        #navbar li:hover { background: rgba(255,255,255,0.1); color: #fff; }
         #navbar li.active { background: linear-gradient(to bottom, #111111 0%, #444 100%); color: #fff; border-bottom: 2px solid #ffffff; }
 
         #main-container { 
@@ -40,20 +42,37 @@
         .section { display: none; text-align: center; }
         .section.active { display: block; }
 
+        /* Estilo Contadores */
         .log-box { 
             background: rgba(0,0,0,0.3); border: 1px solid #ffffff;
-            padding: 20px; margin: 25px 0; border-radius: 10px;
+            padding: 25px; margin: 25px 0; border-radius: 10px;
         }
-
         .count-num { font-size: 48px; font-weight: bold; color: #39FF14; font-family: monospace; }
-        .www-box { font-size: 14px; color: #58a6ff; margin-top: 10px; font-family: monospace; }
-        .ssl-text { font-size: 9px; color: #aaa; margin-top: 10px; display: block; letter-spacing: 1px; }
+        .www-box { font-size: 13px; color: #58a6ff; margin-top: 10px; font-family: monospace; }
+
+        /* Estilo MIT Modal */
+        #modal-mit {
+            display: none; position: fixed; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); width: 85%; max-width: 500px;
+            background: #f0f0f0; color: #111; padding: 25px;
+            border-radius: 8px; z-index: 1000; border: 2px solid #ffffff;
+        }
+        #overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); z-index: 999;
+        }
+        .mit-content { 
+            font-family: monospace; font-size: 11px; height: 180px; 
+            overflow-y: scroll; background: #fff; padding: 10px; border: 1px solid #ccc; text-align: left;
+        }
 
         footer { text-align: center; padding: 40px 0; }
         .nico-credit { color: #666; font-size: 10px; letter-spacing: 1px; }
     </style>
 </head>
 <body>
+
+<div id="overlay" onclick="cerrarMIT()"></div>
 
 <div id="navbar">
     <div class="apple-icon"></div>
@@ -69,25 +88,54 @@
 <div id="main-container">
     
     <div id="sec-cydia" class="section active">
-        <h2>Pear Inc.</h2>
+        <h2>Servidor Pear Inc.</h2>
         <div class="log-box">
-            <p style="font-size: 10px; color: #ffffff; margin: 0; letter-spacing: 2px;">PETICIONES DEL SERVIDOR</p>
+            <p style="font-size: 10px; color: #ffffff; margin: 0; letter-spacing: 2px;">PETICIONES DESDE CYDIA</p>
             <span id="contador-dinamico" class="count-num">---</span>
-            
-            <div class="www-box">
-                CONEXIÓN CON WWW: <span id="count-www">38</span>
-            </div>
-            
-            <span class="ssl-text">CONEXIÓN SEGURA POR SSL ACTIVADA</span>
+            <div class="www-box">CONEXIÓN CON WWW: <span id="count-www">38</span></div>
         </div>
         <p style="font-size: 12px; color: #ccc;"><b>Repo:</b> https://nicowtnow.github.io/Mac/</p>
     </div>
 
     <div id="sec-pear" class="section">
-        <h2>Corporación Pear Inc.</h2>
-        <p style="text-align: justify; font-size: 13px;">Estamos desarrollando <b>theztap</b> para hacer los Pearphone una realidad. Nuestra meta es la creación de una empresa verdadera que fusione hardware y Memoria 5D.</p>
+        <h2>Visión Corporativa</h2>
+        <p style="text-align: justify; font-size: 13px; line-height: 1.6;">
+            Pear Inc. no es solo un repositorio, es el inicio de una empresa de hardware y software real. Estamos construyendo el ecosistema del futuro, integrando la sabiduría universal en cada bit.
+        </p>
+        <button onclick="abrirMIT()" style="margin-top:20px; padding: 10px 20px; cursor: pointer; background: #fff; color: #000; border: none; font-weight: bold; border-radius: 4px;">VER LICENCIA MIT</button>
     </div>
 
+    <div id="sec-5d" class="section">
+        <h2 style="font-size: 22px;">Teoría de la Memoria 5D</h2>
+        <hr style="border: 0.5px solid rgba(255,255,255,0.2); margin: 20px 0;">
+        <p style="text-align: justify; font-size: 14px; line-height: 1.8; font-style: italic;">
+            "La sabiduría es información auto-impuesta, no externa. El universo opera sobre el trabajo de dimensiones previas que se convierten en la base de nuevos Teseractos. Luca no consumió a otros por hambre, sino por evolución, integrándolos para formar nuestra complejidad. El Big Grand Reset no es el fin, sino la transición de escala donde la estructura colapsa para renacer."
+        </p>
+    </div>
+
+    <div id="sec-xt" class="section">
+        <h2>Desarrollo XT</h2>
+        <div style="text-align: left; font-size: 13px; line-height: 1.6; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 8px; border: 1px solid #ffffff;">
+            <p><b>Software en proceso:</b></p>
+            <ul>
+                <li><b>Pear OS:</b> Desarrollado íntegramente en <b>C++</b> para máxima eficiencia en el manejo de Teseractos.</li>
+                <li><b>Theztap App:</b> Aplicación central desarrollada en <b>Xcode (Swift)</b> para la gestión de la Memoria 5D.</li>
+            </ul>
+            <p style="color: #39FF14; text-align: center; font-weight: bold; margin-top: 15px;">META: HACER LOS PEARPHONE REALIDAD.</p>
+        </div>
+    </div>
+
+</div>
+
+<div id="modal-mit">
+    <h3 style="margin-top: 0;">MIT LICENSE</h3>
+    <div class="mit-content">
+        Copyright (c) 2026 Pear Inc. - Nico<br><br>
+        Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software...
+        <br><br>
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY...
+    </div>
+    <p align="center"><button onclick="cerrarMIT()" style="margin-top: 15px; padding: 5px 15px;">CERRAR</button></p>
 </div>
 
 <footer>
@@ -102,30 +150,31 @@
         document.getElementById('tab-' + sectionId).classList.add('active');
     }
 
-    // Lógica de contadores acumulativos
+    function abrirMIT() {
+        document.getElementById('modal-mit').style.display = 'block';
+        document.getElementById('overlay').style.display = 'block';
+    }
+    function cerrarMIT() {
+        document.getElementById('modal-mit').style.display = 'none';
+        document.getElementById('overlay').style.display = 'none';
+    }
+
     function actualizarContadores() {
-        // 1. Contador WWW (sube +1 cada carga de página)
-        // Usamos localStorage para que Nico vea cómo sube en su navegador
-        let visitasLocal = localStorage.getItem('www_visitas') || 38;
-        visitasLocal = parseInt(visitasLocal) + 1;
-        localStorage.setItem('www_visitas', visitasLocal);
-        document.getElementById('count-www').innerHTML = visitasLocal;
+        // Contador WWW (+1 por sesión local)
+        let visitas = localStorage.getItem('www_visitas') || 38;
+        visitas = parseInt(visitas) + 1;
+        localStorage.setItem('www_visitas', visitas);
+        document.getElementById('count-www').innerHTML = visitas;
 
-        // 2. Contador de Servidor (Acumulativo)
+        // Contador Cydia Acumulativo (45, 26, 26...)
         const ahora = new Date();
-        const horas = ahora.getHours();
-        const bloques = Math.floor(horas / 2); // Cada 2 horas cambia el ritmo
-        
-        let totalServidor = 367; // Tu base de ejemplo
-        
-        // Patrón de suma: 45, 26, 26, 45, 26, 26...
+        const bloques = Math.floor(ahora.getHours() / 2);
+        let totalCydia = 367; 
         const patron = [45, 26, 26];
-        
         for (let i = 0; i < bloques; i++) {
-            totalServidor += patron[i % 3];
+            totalCydia += patron[i % 3];
         }
-
-        document.getElementById('contador-dinamico').innerHTML = totalServidor;
+        document.getElementById('contador-dinamico').innerHTML = totalCydia;
     }
 
     actualizarContadores();
