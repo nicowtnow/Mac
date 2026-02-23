@@ -82,3 +82,94 @@
 <div id="overlay" onclick="cerrarMIT()"></div>
 
 <div id="navbar">
+    <div class="apple-icon"></div>
+    <ul>
+        <li id="tab-5d" onclick="showSection('5d')">5D</li>
+        <li id="tab-pear" onclick="showSection('pear')">Pear</li>
+        <li id="tab-cydia" class="active" onclick="showSection('cydia')">Cydia y Repo</li>
+        <li id="tab-xt" onclick="showSection('xt')">Pearphone XT</li>
+        <li style="border-right: none;">Book</li>
+    </ul>
+</div>
+
+<div id="main-container">
+    
+    <div id="sec-cydia" class="section active">
+        <h2>Pear Inc.</h2>
+        <div class="log-box">
+            <p style="font-size: 11px; color: #ffffff; margin: 0; letter-spacing: 2px;">PETICIONES DEL SERVIDOR</p>
+            <span id="contador-dinamico" class="count-num">26</span>
+            <span class="ssl-text">● CONEXIÓN SEGURA POR SSL ACTIVADA</span>
+        </div>
+        <p style="font-size: 12px; color: #ccc;"><b>Repo:</b> https://nicowtnow.github.io/Mac/</p>
+    </div>
+
+    <div id="sec-pear" class="section">
+        <h2 style="font-size: 24px;">Corporación Pear Inc.</h2>
+        <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 20px 0;">
+        <div style="text-align: justify; font-size: 13px; line-height: 1.6;">
+            <p>Estamos en el proceso de creación de una <b>empresa verdadera</b>. Actualmente desarrollamos <b>theztap</b>, un ecosistema diseñado para conectar la Memoria 5D con la tecnología física.</p>
+            <p>Nuestra meta es hacer los <b>Pearphone</b> una realidad tangible, junto con el OS de Pearphone y una línea exclusiva de accesorios que operen bajo principios de inteligencia universal.</p>
+            <p align="center" style="margin-top: 25px;">
+                <button class="btn-mit" onclick="abrirMIT()">VER LICENCIA MIT</button>
+            </p>
+        </div>
+    </div>
+
+    <div id="sec-5d" class="section">
+        <h2 style="font-size: 24px;">Memoria 5D</h2>
+        <p style="text-align: justify; font-size: 13px;">La sabiduría es información auto-impuesta. El universo opera sobre el trabajo de dimensiones previas. Luca integró la complejidad para evolucionar.</p>
+    </div>
+
+    <div id="sec-xt" class="section">
+        <h2 style="font-size: 24px; color: #39FF14;">Pearphone XT</h2>
+        <p>Próximamente en construcción: <b>theztap</b></p>
+    </div>
+
+</div>
+
+<div id="modal-mit">
+    <h3 style="margin-top: 0;">MIT LICENSE</h3>
+    <div style="font-size: 10px; height: 200px; overflow-y: scroll; border: 1px solid #ddd; padding: 10px; text-align: left; font-family: monospace;">
+        Copyright (c) 2026 Pear Inc. - Nico<br><br>
+        Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files... [Contenido largo de la licencia MIT]...
+    </div>
+    <p align="center"><button onclick="cerrarMIT()" style="margin-top: 15px;">CERRAR</button></p>
+</div>
+
+<footer>
+    &copy; 2026 Pear Inc. - Nico
+</footer>
+
+<script type="text/javascript">
+    function showSection(sectionId) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('#navbar li').forEach(t => t.classList.remove('active'));
+        document.getElementById('sec-' + sectionId).classList.add('active');
+        document.getElementById('tab-' + sectionId).classList.add('active');
+    }
+
+    function abrirMIT() {
+        document.getElementById('modal-mit').style.display = 'block';
+        document.getElementById('overlay').style.display = 'block';
+    }
+    function cerrarMIT() {
+        document.getElementById('modal-mit').style.display = 'none';
+        document.getElementById('overlay').style.display = 'none';
+    }
+
+    function actualizarSistema() {
+        const ahora = new Date();
+        const dias = Math.floor(ahora.getTime() / 86400000);
+        let total = 26; 
+        const bloques = Math.floor(ahora.getHours() / 4);
+        for (let i = 0; i < bloques; i++) {
+            total += Math.floor(Math.random() * 50) + 20; 
+        }
+        document.getElementById('contador-dinamico').innerHTML = total;
+    }
+    actualizarSistema();
+</script>
+
+</body>
+</html>
