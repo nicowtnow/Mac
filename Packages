@@ -67,17 +67,3 @@ Architecture: iphoneos-arm
 Filename: Files/lowerinstall.deb
 Section: Tweaks
 Name: LowerInstall
-
-Package: com.satouaoi.appstorefix
-Version: 1.0
-Architecture: iphoneos-arm
-Filename: Files/appstorefix.deb
-Section: Fixes
-Name: AppStore Fix
-
-Package: com.electimon.bagxml
-Version: 1.0
-Architecture: iphoneos-arm
-Filename: Files/bagxml.deb
-Section: Configuration
-Name: Bag.xml
