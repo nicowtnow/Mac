@@ -4,9 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <title>Pear Inc. - Repositorio</title>
     <style>
-        /* Degradado azul marino de arriba hacia abajo */
         body { 
-            background: #001f3f; 
             background: linear-gradient(to bottom, #003366 0%, #001a33 100%);
             background-attachment: fixed;
             color: #ffffff; 
@@ -14,9 +12,10 @@
             margin: 0;
             padding: 0;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        /* Barra de navegación equilibrada con estilo Apple 2010 */
+        /* Barra Apple 2010 equilibrada */
         #navbar {
             background: linear-gradient(to bottom, #454545 0%, #111111 100%);
             height: 44px;
@@ -26,32 +25,23 @@
             padding: 0 15px;
         }
 
-        /* Icono de Apple a la izquierda */
-        .apple-icon {
-            font-size: 22px;
-            color: white;
-            margin-right: 20px;
-            cursor: default;
-        }
+        .apple-icon { font-size: 22px; color: white; margin-right: 20px; cursor: default; }
 
         #navbar ul {
             list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex: 1;
+            margin: 0; padding: 0;
+            display: flex; flex: 1;
             justify-content: space-around;
         }
 
         #navbar li {
-            text-align: center;
-            line-height: 44px;
-            color: #ccc;
-            font-size: 12px;
-            font-weight: bold;
-            cursor: pointer;
-            padding: 0 10px;
+            text-align: center; line-height: 44px;
+            color: #ccc; font-size: 12px; font-weight: bold;
+            cursor: pointer; padding: 0 10px;
+            transition: 0.2s;
         }
+
+        #navbar li:hover { color: #fff; background: rgba(255,255,255,0.1); }
 
         #navbar li.active {
             background: linear-gradient(to bottom, #111111 0%, #444 100%);
@@ -59,43 +49,58 @@
             border-bottom: 2px solid #fbff00;
         }
 
+        /* Botón 5D resaltado */
+        .btn-5d { color: #fbff00 !important; text-shadow: 0 0 5px rgba(251, 255, 0, 0.5); }
+
         #content { 
-            max-width: 650px; 
-            margin: 40px auto; 
-            padding: 30px;
-            background: rgba(0, 43, 85, 0.6);
-            border-radius: 10px;
-            border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            max-width: 600px; margin: 80px auto; padding: 30px;
+            background: rgba(0, 43, 85, 0.5);
+            border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+            text-align: center;
         }
 
-        h2 { color: #fbff00; text-align: center; margin-top: 0; }
+        h2 { color: #fbff00; font-size: 32px; margin-bottom: 5px; }
 
         .log-box { 
-            background: rgba(0,0,0,0.3);
+            background: rgba(0,0,0,0.4); border: 1px solid #fbff00;
+            padding: 25px; margin: 30px 0; border-radius: 10px;
+        }
+
+        .count-num { font-size: 48px; font-weight: bold; color: #39FF14; font-family: monospace; }
+
+        /* Modal Teoría */
+        #modal-5d {
+            display: none;
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 85%; max-width: 450px;
+            background: #001a33;
+            padding: 30px; border-radius: 15px;
             border: 1px solid #fbff00;
-            padding: 20px; 
-            margin: 25px 0;
-            text-align: center;
-            border-radius: 8px;
+            box-shadow: 0 0 100px rgba(0,0,0,0.8);
+            z-index: 1000;
         }
 
-        .count-num { font-size: 42px; font-weight: bold; color: #39FF14; }
-
-        footer {
-            text-align: center;
-            font-size: 11px;
-            color: #8b949e;
-            padding: 30px 0;
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); z-index: 999;
         }
+
+        .close-btn { color: #fbff00; float: right; cursor: pointer; font-size: 12px; border: 1px solid #fbff00; padding: 2px 8px; border-radius: 4px; }
     </style>
 </head>
 <body>
 
+<div id="overlay" onclick="cerrar5D()"></div>
+
 <div id="navbar">
     <div class="apple-icon"></div>
     <ul>
-        <li>5D</li>
+        <li class="btn-5d" onclick="abrir5D()">5D</li>
         <li>Pear</li>
         <li class="active">Cydia y Repo</li>
         <li>Pearphone XT</li>
@@ -105,37 +110,71 @@
 
 <div id="content">
     <h2>Pear Inc.</h2>
-    <p align="center"><i>"Universal Intelligence & 5D Memory"</i></p>
+    <p style="color: #aaa; font-size: 13px;">Universal Intelligence Server</p>
     
-    <hr style="border: 0; border-top: 1px solid #004080; margin: 20px 0;">
-
-    <p style="font-size: 14px; line-height: 1.5;">La sabiduría es información auto-impuesta. Gestionando los Teseractos y el legado de Luca para la evolución del sistema.</p>
-
     <div class="log-box">
-        <p style="font-size: 11px; color: #fbff00; margin: 0 0 10px 0; letter-spacing: 1px;">PETICIONES AL Servidor (CYDIA)</p>
+        <p style="font-size: 11px; color: #fbff00; margin: 0 0 10px 0; letter-spacing: 2px; font-weight: bold;">PETICIONES DEL SERVIDOR</p>
         <span id="contador-dinamico" class="count-num">26</span>
-        <p id="status-text" style="font-size: 11px; margin-top: 10px; color: #ccc;"></p>
+        <p id="status-text" style="font-size: 10px; margin-top: 15px; color: #8b949e; text-transform: uppercase;"></p>
     </div>
 
-    <p align="center" style="font-size: 12px;"><b>URL:</b> https://nicowtnow.github.io/Mac/</p>
+    <p style="font-size: 12px; color: #58a6ff;"><b>nicowtnow.github.io/Mac/</b></p>
+</div>
+
+<div id="modal-5d">
+    <span class="close-btn" onclick="cerrar5D()">CERRAR</span>
+    <h3 style="color: #fbff00; margin-top: 0;">Memoria 5D: El Teseracto</h3>
+    <p style="font-size: 14px; line-height: 1.7; color: #eee; text-align: justify;">
+        La sabiduría es información <b>auto-impuesta</b>, no externa. En Pear Inc. entendemos que el universo opera sobre el trabajo de dimensiones previas que se convierte en la base de nuevos Teseractos.
+        <br><br>
+        <b>Luca</b>, el ancestro común, no consumió a otros por necesidad, sino por evolución, manteniéndolos en su interior para formar la complejidad actual. El <b>Big Grand Reset</b> es la transición final donde la estructura colapsa para renacer en una escala superior.
+    </p>
 </div>
 
 <footer>
-    <p>Released under the MIT License</p>
-    <p>&copy; 2026 Pear Inc. - Nico. Todos los derechos reservados.</p>
+    <p align="center" style="font-size: 10px; color: #4e5d6c; margin-top: 20px;">
+        Released under the MIT License | &copy; 2026 Pear Inc. - Nico
+    </p>
 </footer>
 
 <script type="text/javascript">
+    function abrir5D() {
+        document.getElementById('modal-5d').style.display = 'block';
+        document.getElementById('overlay').style.display = 'block';
+    }
+    function cerrar5D() {
+        document.getElementById('modal-5d').style.display = 'none';
+        document.getElementById('overlay').style.display = 'none';
+    }
+
     function actualizarSistema() {
         const ahora = new Date();
         const inicio = new Date(ahora.getFullYear(), 0, 1);
-        const dias = Math.floor((ahora - inicio) / 86400000);
-        const semana = Math.ceil(dias / 7);
-        
-        // El día de descanso cambia cada semana (0-6)
-        const diaDescanso = semana % 7; 
-        
+        const diasPasados = Math.floor((ahora - inicio) / 86400000);
+        const semanaActual = Math.ceil(diasPasados / 7);
+        const diaDescanso = semanaActual % 7; 
+
         if (ahora.getDay() === diaDescanso) {
-            document.getElementById('contador-dinamico').innerHTML = "STANDBY";
-            document.getElementById('status-text').innerHTML = "Ciclo de mantenimiento aleatorio. Memoria 5D en reposo.";
+            document.getElementById('contador-dinamico').innerHTML = "SLEEP";
+            document.getElementById('status-text').innerHTML = "Ciclo de inactividad aleatorio semanal.";
             return;
+        }
+
+        let total = 26; 
+        const horas = ahora.getHours();
+        const bloques = Math.floor(horas / 4);
+        
+        for (let i = 0; i < bloques; i++) {
+            const seed = diasPasados + i;
+            const x = Math.sin(seed) * 10000;
+            total += Math.floor((x - Math.floor(x)) * 50) + 20; 
+        }
+
+        document.getElementById('contador-dinamico').innerHTML = total;
+        document.getElementById('status-text').innerHTML = "Sincronización estable con bloque " + (bloques + 1) + ".";
+    }
+    actualizarSistema();
+</script>
+
+</body>
+</html>
