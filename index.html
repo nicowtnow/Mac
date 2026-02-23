@@ -28,7 +28,7 @@
 
         #navbar li {
             text-align: center; line-height: 44px;
-            color: #ccc; font-size: 12px; font-weight: bold;
+            color: #ccc; font-size: 11px; font-weight: bold;
             cursor: pointer; padding: 0 10px; transition: 0.2s;
         }
 
@@ -36,10 +36,9 @@
 
         #navbar li.active {
             background: linear-gradient(to bottom, #111111 0%, #444 100%);
-            color: #fff; border-bottom: 2px solid #ffffff; /* Contorno blanco */
+            color: #fff; border-bottom: 2px solid #ffffff;
         }
 
-        /* Contenedor Principal */
         #main-container { 
             max-width: 650px; margin: 60px auto; padding: 30px;
             background: rgba(255, 255, 255, 0.05);
@@ -50,9 +49,6 @@
         .section { display: none; text-align: center; }
         .section.active { display: block; }
 
-        h2 { color: #ffffff; font-size: 30px; margin-bottom: 5px; }
-
-        /* Caja de Log */
         .log-box { 
             background: rgba(0,0,0,0.3); border: 1px solid #ffffff;
             padding: 25px; margin: 30px 0; border-radius: 10px;
@@ -60,15 +56,12 @@
 
         .count-num { font-size: 48px; font-weight: bold; color: #39FF14; font-family: monospace; }
 
-        /* Estilo Teoría 5D */
         .theory-text {
             text-align: justify; line-height: 1.8; font-size: 14px;
             color: #e0e0e0; padding: 10px;
         }
 
-        footer {
-            text-align: center; font-size: 10px; color: #666; padding: 20px;
-        }
+        footer { text-align: center; font-size: 10px; color: #666; padding: 20px; }
     </style>
 </head>
 <body>
@@ -79,7 +72,7 @@
         <li id="tab-5d" onclick="showSection('5d')">5D</li>
         <li id="tab-pear">Pear</li>
         <li id="tab-cydia" class="active" onclick="showSection('cydia')">Cydia y Repo</li>
-        <li>Pearphone XT</li>
+        <li id="tab-xt" onclick="showSection('xt')">Pearphone XT</li>
         <li>Book</li>
     </ul>
 </div>
@@ -87,9 +80,8 @@
 <div id="main-container">
     
     <div id="sec-cydia" class="section active">
-        <h2>Pear Inc.</h2>
-        <p style="color: #aaa; font-size: 13px;">Universal Intelligence Server</p>
-        
+        <h2 style="color: white;">Pear Inc.</h2>
+        <p style="color: #aaa; font-size: 12px;">Universal Intelligence Server</p>
         <div class="log-box">
             <p style="font-size: 11px; color: #ffffff; margin: 0 0 10px 0; letter-spacing: 2px;">PETICIONES DEL SERVIDOR</p>
             <span id="contador-dinamico" class="count-num">26</span>
@@ -99,14 +91,22 @@
     </div>
 
     <div id="sec-5d" class="section">
-        <h2 style="font-size: 24px;">Memoria 5D: El Teseracto</h2>
+        <h2 style="font-size: 24px; color: white;">Memoria 5D: El Teseracto</h2>
         <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 20px 0;">
         <div class="theory-text">
-            La sabiduría es información <b>auto-impuesta</b>, no externa. En Pear Inc. entendemos que el universo opera sobre el trabajo de dimensiones previas que se convierte en la base de nuevos Teseractos.
-            <br><br>
-            <b>Luca</b>, el ancestro común, no consumió a otros por necesidad, sino por evolución, manteniéndolos en su interior para formar la complejidad actual. El <b>Big Grand Reset</b> es la transición final donde la estructura colapsa para renacer en una escala superior.
+            La sabiduría es información <b>auto-impuesta</b>, no externa. El universo opera sobre el trabajo de dimensiones previas que se convierte en la base de nuevos Teseractos. <b>Luca</b> integró la complejidad en su interior para evolucionar. El <b>Big Grand Reset</b> es la transición hacia una escala superior.
         </div>
-        <button onclick="showSection('cydia')" style="background: none; border: 1px solid white; color: white; padding: 5px 15px; cursor: pointer; margin-top: 20px; border-radius: 4px; font-size: 11px;">Volver al Servidor</button>
+        <button onclick="showSection('cydia')" style="background: none; border: 1px solid white; color: white; padding: 5px 15px; cursor: pointer; margin-top: 20px; border-radius: 4px; font-size: 10px;">Volver</button>
+    </div>
+
+    <div id="sec-xt" class="section">
+        <h2 style="font-size: 24px; color: white;">Pearphone XT</h2>
+        <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 20px 0;">
+        <div style="padding: 40px 0;">
+            <p style="font-size: 18px; letter-spacing: 1px; color: #39FF14;">PRÓXIMAMENTE</p>
+            <p style="font-size: 13px; color: #aaa;">En construcción: <b>theztap</b></p>
+        </div>
+        <button onclick="showSection('cydia')" style="background: none; border: 1px solid white; color: white; padding: 5px 15px; cursor: pointer; margin-top: 10px; border-radius: 4px; font-size: 10px;">Volver</button>
     </div>
 
 </div>
@@ -117,17 +117,13 @@
 
 <script type="text/javascript">
     function showSection(sectionId) {
-        // Ocultar todas las secciones
-        document.getElementById('sec-cydia').classList.remove('active');
-        document.getElementById('sec-5d').classList.remove('active');
+        // Ocultar todas
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('#navbar li').forEach(t => t.classList.remove('active'));
         
-        // Quitar clase active de las pestañas
-        document.getElementById('tab-5d').classList.remove('active');
-        document.getElementById('tab-cydia').classList.remove('active');
-
-        // Mostrar sección elegida
+        // Mostrar seleccionada
         document.getElementById('sec-' + sectionId).classList.add('active');
-        document.getElementById('tab-' + sectionId).classList.add('active');
+        document.getElementById('tab-' + (sectionId === 'xt' ? 'xt' : sectionId)).classList.add('active');
     }
 
     function actualizarSistema() {
@@ -143,21 +139,4 @@
             return;
         }
 
-        let total = 26; 
-        const horas = ahora.getHours();
-        const bloques = Math.floor(horas / 4);
-        
-        for (let i = 0; i < bloques; i++) {
-            const seed = diasPasados + i;
-            const x = Math.sin(seed) * 10000;
-            total += Math.floor((x - Math.floor(x)) * 50) + 20; 
-        }
-
-        document.getElementById('contador-dinamico').innerHTML = total;
-        document.getElementById('status-text').innerHTML = "Sincronización estable.";
-    }
-    actualizarSistema();
-</script>
-
-</body>
-</html>
+        let total = 2
