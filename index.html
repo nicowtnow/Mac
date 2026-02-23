@@ -3,43 +3,69 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <title>Pear Inc. - Repositorio</title>
+    <style>
+        body { background-color: #000; color: #ccc; font-family: 'Courier New', monospace; }
+        #content { max-width: 600px; margin: 40px auto; padding: 20px; border: 1px solid #333; box-shadow: 0 0 20px rgba(0,255,0,0.1); }
+        .log-box { background: #0d1117; color: #39FF14; padding: 20px; border-radius: 10px; border: 1px solid #30363d; text-align: center; }
+        .count-num { font-size: 38px; font-weight: bold; text-shadow: 0 0 10px rgba(57, 255, 20, 0.5); }
+        .info-text { font-size: 11px; color: #8b949e; margin-top: 10px; }
+    </style>
 </head>
 <body>
 
 <div id="content">
     <div align="center">
-        <h2>Pear Inc. Repo</h2>
-        <p><i>"Universal Intelligence & 5D Memory"</i></p>
+        <h2>PEAR INC. SYSTEMS</h2>
+        <p style="color: #fbff00;"><i>"Universal Intelligence & 5D Memory"</i></p>
     </div>
     
-    <p>Bienvenido al repositorio oficial de Nico. Aquí se gestiona el trabajo previo de Luca y la evolución de los Teseractos en iOS.</p>
+    <hr style="border: 0.5px solid #333;">
     
-    <hr>
-    
-    <h3>Cómo usar esta repo:</h3>
-    <ul>
-        <li>Agrega esta URL en Cydia: <b>https://nicowtnow.github.io/Mac/</b></li>
-        <li>Espera a que la Memoria 5D se actualice.</li>
-        <li>Instala tus tweaks favoritos como Cylinder o Zeppelin.</li>
-    </ul>
-
-    <hr>
-    
-    <div style="margin-top: 30px; text-align: center; font-family: sans-serif;">
-        <p style="color: #555; font-size: 0.9em;">Conexiones al Teseracto (Retro):</p>
-        <img src="https://counter.ghapi.xyz/github/v1/counter/nicowtnow/total" alt="Visitas">
+    <div class="log-box">
+        <p style="margin: 0; font-size: 12px; color: #8b949e; letter-spacing: 2px;">LOG DE PETICIONES DE RED</p>
+        <h3 style="margin: 15px 0; color: #c9d1d9;">Cydia Requests:</h3>
         
-        <div style="margin-top: 20px;">
-            <p style="color: #888; font-size: 0.8em;">Accesos a la Inteligencia Universal:</p>
-            <img src="https://profile-counter.glitch.me/nicowtnow-repo/count.svg" alt="Contador de Visitas">
-        </div>
+        <div id="contador-dinamico" class="count-num">Calculando...</div>
+        
+        <p id="status-text" class="info-text"></p>
     </div>
 
-    <hr>
-    <p align="center">Proyecto escolar de Nico - 2026</p>
-</div>
+    <script type="text/javascript">
+        function generarPeticiones() {
+            const ahora = new Date();
+            const inicioAño = new Date(ahora.getFullYear(), 0, 1);
+            const diasPasados = Math.floor((ahora - inicioAño) / (24 * 60 * 60 * 1000));
+            const semanaActual = Math.ceil(diasPasados / 7);
+            
+            // 1. Determinar el día de descanso aleatorio de esta semana (0-6)
+            // Usamos la semana del año como "semilla" para que el día cambie cada semana pero sea el mismo hoy
+            const diaDescanso = semanaActual % 7; 
+            const hoy = ahora.getDay();
 
-<script type="text/javascript" src="dptemplate.js"></script>
+            if (hoy === diaDescanso) {
+                document.getElementById('contador-dinamico').innerHTML = "SYSTEM STANDBY";
+                document.getElementById('status-text').innerHTML = "Ciclo de inactividad aleatorio detectado. Sincronización pausada.";
+                return;
+            }
 
-</body>
-</html>
+            // 2. Base fija
+            let total = 142;
+            
+            // 3. Generar aumentos aleatorios basados en tus números (58, 46, 97)
+            const horaActual = ahora.getHours();
+            const bloquesPasados = Math.floor(horaActual / 4);
+            
+            // Usamos una función pseudo-aleatoria basada en la fecha para que no cambie al refrescar la página
+            function getRandomParaBloque(bloque) {
+                const seed = diasPasados + bloque;
+                const x = Math.sin(seed) * 10000;
+                const random = x - Math.floor(x);
+                return Math.floor(random * (100 - 40 + 1)) + 40; // Números entre 40 y 100
+            }
+
+            for (let i = 0; i < bloquesPasados; i++) {
+                total += getRandomParaBloque(i);
+            }
+
+            document.getElementById('contador-dinamico').innerHTML = total;
+            document.getElementById('status-text').innerHTML = "Conexión estable. " + (bloquesPasados + 1) + "º ciclo
