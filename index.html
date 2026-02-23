@@ -12,13 +12,14 @@
             padding: 0;
         }
 
-        /* Barra de navegación estilo Apple 2010 */
+        /* Barra de navegación equilibrada Pear Inc. */
         #navbar {
             background: linear-gradient(to bottom, #454545 0%, #111111 100%);
             height: 44px;
+            border-bottom: 1px solid #000;
             display: flex;
             justify-content: center;
-            border-bottom: 1px solid #000;
+            align-items: center;
         }
 
         #navbar ul {
@@ -26,24 +27,51 @@
             margin: 0;
             padding: 0;
             display: flex;
+            width: 100%;
+            max-width: 900px;
         }
 
         #navbar li {
-            padding: 0 20px;
+            flex: 1; /* Esto equilibra el tamaño de todas las pestañas */
+            text-align: center;
             line-height: 44px;
             color: #ccc;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: bold;
             cursor: pointer;
             border-right: 1px solid #333;
+            transition: background 0.3s;
         }
 
         #navbar li:first-child { border-left: 1px solid #333; }
 
-        /* Pestaña activa (Cydia y Repo) */
+        /* Pestaña activa */
         #navbar li.active {
             background: linear-gradient(to bottom, #111111 0%, #454545 100%);
             color: #fff;
+        }
+
+        /* Logo de Pear simplificado */
+        .pear-logo {
+            display: inline-block;
+            width: 12px;
+            height: 14px;
+            background: #fff;
+            border-radius: 6px 6px 6px 6px;
+            position: relative;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+        .pear-logo:after {
+            content: '';
+            position: absolute;
+            top: -4px;
+            right: 2px;
+            width: 4px;
+            height: 6px;
+            background: #fff;
+            border-radius: 0 100% 0 0;
+            transform: rotate(20deg);
         }
 
         #content { 
@@ -56,11 +84,11 @@
             border: 1px solid #004080;
         }
 
-        h2 { color: #fbff00; text-align: center; }
+        h2 { color: #fbff00; text-align: center; margin-top: 0; }
 
         .log-box { 
             border: 1px solid rgba(255,255,255,0.2); 
-            background: rgba(0,0,0,0.2);
+            background: rgba(0,0,0,0.3);
             padding: 20px; 
             margin: 25px 0;
             text-align: center;
@@ -70,7 +98,7 @@
         .count-num { 
             font-size: 38px; 
             font-weight: bold; 
-            color: #fff;
+            color: #39FF14; /* Verde neón para las peticiones */
             display: block;
         }
 
@@ -87,9 +115,11 @@
 
 <div id="navbar">
     <ul>
+        <li>5D</li>
         <li>Pear</li>
-        <li class="active">Cydia y Repo</li>
+        <li class="active"><span class="pear-logo"></span>Cydia y Repo</li>
         <li>Pearphone XT</li>
+        <li>Book</li>
     </ul>
 </div>
 
@@ -99,15 +129,15 @@
     
     <hr style="border: 0.5px solid #004080; margin: 20px 0;">
 
-    <p>Bienvenido al repositorio oficial. Gestionando la evolución de los Teseractos y la sabiduría auto-impuesta de Luca.</p>
+    <p>Sincronización de la Memoria 5D: La sabiduría es información auto-impuesta. Gestionando el trabajo previo de Luca para el hardware del futuro.</p>
 
     <div class="log-box">
-        <p style="font-size: 12px; color: #fbff00; margin: 0; letter-spacing: 1px;">PAQUETES SOLICITADOS</p>
+        <p style="font-size: 12px; color: #fbff00; margin: 0; letter-spacing: 1px;">PAQUETES SOLICITADOS AL TESERACTO</p>
         <span id="contador-dinamico" class="count-num">---</span>
         <p id="status-text" style="font-size: 11px; margin-top: 10px; color: #ccc;"></p>
     </div>
 
-    <p style="font-size: 13px;">URL Cydia: <b>https://nicowtnow.github.io/Mac/</b></p>
+    <p style="font-size: 13px; text-align: center;">Servidor de Red: <b>https://nicowtnow.github.io/Mac/</b></p>
 </div>
 
 <footer>
@@ -122,12 +152,13 @@
         const diasPasados = Math.floor((ahora - inicioAño) / (24 * 60 * 60 * 1000));
         const semanaActual = Math.ceil(diasPasados / 7);
         
+        // El día de descanso cambia cada semana
         const diaDescanso = semanaActual % 7; 
         const hoy = ahora.getDay();
 
         if (hoy === diaDescanso) {
-            document.getElementById('contador-dinamico').innerHTML = "OFFLINE";
-            document.getElementById('status-text').innerHTML = "Sincronización pausada por ciclo aleatorio semanal.";
+            document.getElementById('contador-dinamico').innerHTML = "SLEEP MODE";
+            document.getElementById('status-text').innerHTML = "Estado: Ciclo de descanso de la Memoria 5D.";
             return;
         }
 
@@ -135,6 +166,7 @@
         const horaActual = ahora.getHours();
         const bloques = Math.floor(horaActual / 4);
         
+        // Generador aleatorio basado en tus bloques
         function getAleatorio(semilla) {
             const x = Math.sin(diasPasados + semilla) * 10000;
             return Math.floor((x - Math.floor(x)) * (98 - 45 + 1)) + 45;
@@ -146,7 +178,7 @@
         }
 
         document.getElementById('contador-dinamico').innerHTML = base + extra;
-        document.getElementById('status-text').innerHTML = "Peticiones registradas en el ciclo actual de 24h.";
+        document.getElementById('status-text').innerHTML = "Peticiones detectadas en el bloque actual de 4 horas.";
     }
 
     gestionarSistema();
