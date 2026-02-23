@@ -1,4 +1,4 @@
-<!wDOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
@@ -8,96 +8,105 @@
         body { 
             background: linear-gradient(to bottom, #003366 0%, #001a33 100%);
             background-attachment: fixed;
-            color: #ffffff; font-family: "Lucida Grande", sans-serif; 
+            color: #ffffff; font-family: sans-serif; 
             margin: 0; padding: 0; min-height: 100vh;
         }
         #navbar {
             background: linear-gradient(to bottom, #454545 0%, #111111 100%);
             height: 44px; border-bottom: 1px solid #000;
-            display: flex; align-items: center; padding: 0 15px;
+            display: flex; align-items: center; padding: 0 10px;
             position: sticky; top: 0; z-index: 1000;
         }
-        .apple-icon { font-size: 20px; color: white; margin-right: 15px; }
+        .apple-icon { font-size: 18px; color: white; margin-right: 10px; }
         #navbar ul { list-style: none; margin: 0; padding: 0; display: flex; flex: 1; height: 100%; }
         #navbar li {
             flex: 1; text-align: center; line-height: 44px;
-            color: #ccc; font-size: 11px; font-weight: bold; cursor: pointer; border-right: 1px solid #333;
+            color: #ccc; font-size: 10px; font-weight: bold; cursor: pointer; border-right: 1px solid #333;
         }
-        #navbar li.active { background: linear-gradient(to bottom, #111111 0%, #444 100%); color: #fff; }
+        #navbar li.active { background: rgba(255,255,255,0.1); color: #fff; border-bottom: 2px solid #39FF14; }
 
-        /* BOTÓN INVISIBLE EN LA BARRA */
-        #monitor-trigger {
-            width: 50px; height: 44px; cursor: pointer; border-left: 1px solid #333;
-        }
-
-        /* VENTANA FLOTANTE PEQUEÑA */
-        #monitor-popup {
-            display: none; position: fixed; top: 50px; right: 10px;
-            background: #000; color: #39FF14; border: 1px solid #39FF14;
-            padding: 8px 12px; border-radius: 5px; font-family: monospace;
-            font-size: 12px; z-index: 2000; box-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
-        }
+        /* BOTONES DE LA DERECHA */
+        .nav-special { width: 35px; text-align: center; font-size: 12px; cursor: pointer; height: 44px; line-height: 44px; }
+        #secret-btn { color: #39FF14; font-weight: bold; border-left: 1px solid #333; } 
+        #monitor-btn { color: transparent; width: 30px; } /* EL BOTÓN INVISIBLE */
 
         #main-container { 
-            max-width: 600px; margin: 40px auto; padding: 25px;
-            background: rgba(255, 255, 255, 0.05); border-radius: 12px; 
-            border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-            text-align: center;
+            max-width: 500px; margin: 30px auto; padding: 20px;
+            background: rgba(0, 0, 0, 0.4); border-radius: 15px; 
+            border: 1px solid rgba(255,255,255,0.1); text-align: center;
         }
-        .log-box { 
-            background: rgba(0,0,0,0.3); border: 2px solid #ffffff;
-            padding: 25px; margin: 20px 0; border-radius: 10px;
-        }
-        .count-num { font-size: 55px; font-weight: bold; color: #39FF14; font-family: 'Courier New', monospace; text-shadow: 0 0 10px #39FF14; }
         
-        #toast-nico {
-            display: none; position: fixed; top: 60px; left: 50%;
-            transform: translateX(-50%); background: #ffffff; color: #000;
-            padding: 10px 20px; border-radius: 20px; font-size: 12px; font-weight: bold; z-index: 2000;
-        }
+        /* OCULTAR SECCIONES POR DEFECTO */
+        .section { display: none; }
+        .section.active { display: block !important; }
 
-        footer { text-align: center; padding: 40px 0; }
-        .nico-credit { color: #666; font-size: 11px; cursor: pointer; padding: 10px; display: inline-block; }
+        .log-box { 
+            background: rgba(0,0,0,0.5); border: 2px solid #ffffff;
+            padding: 30px; margin: 20px 0; border-radius: 12px;
+        }
+        .count-num { font-size: 60px; font-weight: bold; color: #39FF14; font-family: monospace; }
+        
+        /* POPUP CENTRAL */
+        #toast {
+            display: none; position: fixed; top: 50%; left: 50%;
+            transform: translate(-50%, -50%); background: #1a1a1a; color: #fff;
+            padding: 25px; border-radius: 15px; z-index: 2000; 
+            border: 1px solid #444; box-shadow: 0 0 40px #000;
+            text-align: center; width: 260px;
+        }
+        .btn-ui { background: #333; color: white; border: 1px solid #555; padding: 10px; margin: 5px; border-radius: 6px; cursor: pointer; width: 100px; font-size: 11px; }
+        .btn-ui:hover { background: #39FF14; color: #000; }
+
+        footer { text-align: center; padding: 30px 0; color: #444; font-size: 10px; }
     </style>
 </head>
 <body>
 
-<div id="toast-nico">Aquí no está</div>
-<div id="monitor-popup" onclick="this.style.display='none'">---</div>
+<div id="toast">
+    <div id="toast-header" style="margin-bottom: 15px; font-weight: bold;">Aquí no está</div>
+    <div id="toast-body">
+        <button class="btn-ui" onclick="showMIT()">VER MIT</button>
+        <button class="btn-ui" onclick="closeToast()">SALIR</button>
+    </div>
+</div>
 
 <div id="navbar">
     <div class="apple-icon"></div>
     <ul>
+        <li id="tab-cydia" class="active" onclick="showSection('cydia')">Cydia</li>
         <li id="tab-5d" onclick="showSection('5d')">5D</li>
         <li id="tab-pear" onclick="showSection('pear')">Pear</li>
-        <li id="tab-cydia" class="active" onclick="showSection('cydia')">Cydia</li>
         <li id="tab-xt" onclick="showSection('xt')">XT</li>
     </ul>
-    <div id="monitor-trigger" onclick="toggleMonitor()"></div>
+    <div id="secret-btn" class="nav-special" onclick="openMainPopup()">:)</div>
+    <div id="monitor-btn" class="nav-special" onclick="checkMonitorClicks()">.</div>
 </div>
 
 <div id="main-container">
     <div id="sec-cydia" class="section active">
-        <h2>Servidor Pear Inc.</h2>
         <div class="log-box">
-            <p style="font-size: 10px; color: #aaa; margin: 0; letter-spacing: 2px;">LIVE REQUESTS</p>
             <div id="contador-dinamico" class="count-num">---</div>
+            <p style="font-size: 9px; color: #39FF14;">LIVE SERVER</p>
         </div>
     </div>
     
     <div id="sec-5d" class="section">
-        <h2>Memoria 5D</h2>
-        <p style="font-size: 14px; font-style: italic;">"La sabiduría es información auto-impuesta."</p>
+        <h2 style="color: #39FF14;">5D</h2>
+        <p style="font-size: 16px; font-weight: bold;">"La materia es el eco de una dimensión que ya no existe."</p>
     </div>
-    <div id="sec-pear" class="section"><h2>Pear Inc.</h2><p>Hardware del futuro.</p></div>
-    <div id="sec-xt" class="section"><h2>XT</h2><p>Kernel 5D.</p></div>
+
+    <div id="sec-pear" class="section">
+        <h2>Pear Inc.</h2>
+        <p>Haciendo realidad la marca Pear y accesorios con aplicaciones como <b>theztap</b>.</p>
+    </div>
+
+    <div id="sec-xt" class="section">
+        <h2>XT</h2>
+        <p>Desarrollando PearOS para satisfacer a todos y hacer realidad los Pearphones.</p>
+    </div>
 </div>
 
-<footer>
-    <div class="nico-credit" onclick="triggerNico()">
-        &copy; 2026 Pear Inc. - <b>Nico 2026</b>
-    </div>
-</footer>
+<footer>&copy; 2026 Pear Inc. - Nico 2026</footer>
 
 <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.17.1/firebase-database-compat.js"></script>
@@ -108,8 +117,6 @@
       authDomain: "pearserver-f8a0e.firebaseapp.com",
       databaseURL: "https://pearserver-f8a0e-default-rtdb.firebaseio.com",
       projectId: "pearserver-f8a0e",
-      storageBucket: "pearserver-f8a0e.appspot.com",
-      messagingSenderId: "34841932085", 
       appId: "1:34841932085:web:96610f04b7ae4e8cca9c7c"
     };
 
@@ -121,87 +128,72 @@
     let rondasRapidas = 0;
     let tiempoRestante = 0;
     let timerInterval;
-    let monitorTexto = "";
+    let faseTexto = "";
 
     serverRef.on('value', (snapshot) => {
         const data = snapshot.val();
-        if (data) { document.getElementById('contador-dinamico').innerText = data.peticiones; }
+        if (data) document.getElementById('contador-dinamico').innerText = data.peticiones;
     });
 
     function iniciarCiclo() {
         let tiempoEspera;
-        let prefijo = "";
-
-        if (rondasRapidas < 2) {
-            prefijo = "RS" + (rondasRapidas + 1) + " ";
-            tiempoEspera = Math.floor(Math.random() * 15000) + 15000;
-        } else if (rondasRapidas === 2) {
-            prefijo = "";
-            tiempoEspera = Math.floor(Math.random() * 15000) + 15000;
-        } else {
-            prefijo = "RL ";
-            tiempoEspera = 120000;
-        }
-
-        tiempoRestante = tiempoEspera;
+        if (rondasRapidas < 2) { faseTexto = "RS" + (rondasRapidas+1); tiempoEspera = 15000 + Math.random()*15000; }
+        else if (rondasRapidas === 2) { faseTexto = "RS3"; tiempoEspera = 15000 + Math.random()*15000; }
+        else { faseTexto = "RL"; tiempoEspera = 120000; }
         
+        tiempoRestante = tiempoEspera;
         if (timerInterval) clearInterval(timerInterval);
-        timerInterval = setInterval(() => {
-            tiempoRestante -= 1000;
-            let seg = Math.ceil(tiempoRestante / 1000);
-            monitorTexto = prefijo + seg + "s";
-            
-            // Actualizar la ventana si está abierta
-            const popup = document.getElementById('monitor-popup');
-            if (popup.style.display === 'block') {
-                popup.innerText = monitorTexto;
-            }
-
-            if (tiempoRestante <= 0) {
-                clearInterval(timerInterval);
-                ejecutarSuma();
-            }
+        timerInterval = setInterval(() => { 
+            tiempoRestante -= 1000; 
+            if (tiempoRestante <= 0) { clearInterval(timerInterval); ejecutarSuma(); } 
         }, 1000);
     }
 
     function ejecutarSuma() {
-        serverRef.transaction((currentData) => {
-            if (currentData) {
-                let n = parseInt(currentData.peticiones) + patronSuma[currentData.index % patronSuma.length];
-                if (n >= 1000) n = 277; 
-                currentData.peticiones = n;
-                currentData.index = (currentData.index + 1) % patronSuma.length;
-            }
-            return currentData;
-        }, () => {
-            rondasRapidas = (rondasRapidas + 1) % 4;
-            iniciarCiclo();
-        });
-    }
-
-    // FUNCIÓN DEL MONITOR SECRETO
-    function toggleMonitor() {
-        const popup = document.getElementById('monitor-popup');
-        if (popup.style.display === 'block') {
-            popup.style.display = 'none';
-        } else {
-            popup.innerText = monitorTexto;
-            popup.style.display = 'block';
-        }
-    }
-
-    function triggerNico() {
-        const t = document.getElementById('toast-nico');
-        t.style.display = 'block';
-        setTimeout(() => { t.style.display = 'none'; }, 2000);
+        serverRef.transaction((d) => { 
+            if(d){ 
+                let n = parseInt(d.peticiones) + patronSuma[d.index % 4];
+                if (n >= 5000) n = 277; // RESET A LOS 5000
+                d.peticiones = n; d.index++; 
+            } return d; 
+        }, () => { rondasRapidas = (rondasRapidas + 1) % 4; iniciarCiclo(); });
     }
 
     function showSection(id) {
-        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-        document.querySelectorAll('#navbar li').forEach(t => t.classList.remove('active'));
+        const sections = document.getElementsByClassName('section');
+        for (let i = 0; i < sections.length; i++) { sections[i].classList.remove('active'); }
+        const tabs = document.querySelectorAll('#navbar li');
+        tabs.forEach(t => t.classList.remove('active'));
         document.getElementById('sec-' + id).classList.add('active');
         document.getElementById('tab-' + id).classList.add('active');
     }
+
+    // EL BOTÓN INVISIBLE - 3 CLICKS
+    let monClicks = 0;
+    function checkMonitorClicks() {
+        monClicks++;
+        if(monClicks >= 3) {
+            let seg = Math.ceil(tiempoRestante/1000);
+            let f = (faseTexto==="RS3") ? "" : faseTexto;
+            alert("PEAR OS MONITOR\n" + f + " " + seg + "s");
+            monClicks = 0;
+        }
+        setTimeout(() => monClicks = 0, 3000);
+    }
+
+    // BOTÓN :)
+    function openMainPopup() {
+        document.getElementById('toast-header').innerText = "Aquí no está";
+        document.getElementById('toast-body').innerHTML = '<button class="btn-ui" onclick="showMIT()">VER MIT</button><button class="btn-ui" onclick="closeToast()">SALIR</button>';
+        document.getElementById('toast').style.display = 'block';
+    }
+
+    function showMIT() {
+        document.getElementById('toast-header').innerText = "DERECHOS / MIT";
+        document.getElementById('toast-body').innerHTML = '<div style="font-size:10px; color:#888; margin-bottom:15px;">© 2026 Pear Inc. Nico.<br>Investigación Teseracto Liberada.</div><button class="btn-ui" onclick="openMainPopup()">VOLVER</button>';
+    }
+
+    function closeToast() { document.getElementById('toast').style.display = 'none'; }
 
     iniciarCiclo();
 </script>
