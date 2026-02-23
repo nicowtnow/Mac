@@ -6,6 +6,7 @@
     <style>
         /* Degradado azul marino de arriba hacia abajo */
         body { 
+            background: #001f3f; 
             background: linear-gradient(to bottom, #003366 0%, #001a33 100%);
             background-attachment: fixed;
             color: #ffffff; 
@@ -15,36 +16,22 @@
             min-height: 100vh;
         }
 
-        /* Barra de navegación estilo Apple 2010 */
+        /* Barra de navegación equilibrada con estilo Apple 2010 */
         #navbar {
             background: linear-gradient(to bottom, #454545 0%, #111111 100%);
             height: 44px;
             border-bottom: 1px solid #000;
             display: flex;
             align-items: center;
-            padding: 0 10px;
+            padding: 0 15px;
         }
 
-        /* Logo de Pear en CSS (a la izquierda) */
-        .pear-logo-css {
-            width: 16px;
-            height: 18px;
-            background: #fff;
-            border-radius: 8px 8px 10px 10px;
-            position: relative;
-            margin-right: 15px;
-            margin-left: 10px;
-        }
-        .pear-logo-css:before {
-            content: '';
-            position: absolute;
-            top: -4px;
-            right: 3px;
-            width: 5px;
-            height: 7px;
-            background: #fff;
-            border-radius: 0 100% 0 0;
-            transform: rotate(25deg);
+        /* Icono de Apple a la izquierda */
+        .apple-icon {
+            font-size: 22px;
+            color: white;
+            margin-right: 20px;
+            cursor: default;
         }
 
         #navbar ul {
@@ -53,59 +40,60 @@
             padding: 0;
             display: flex;
             flex: 1;
+            justify-content: space-around;
         }
 
         #navbar li {
-            flex: 1;
             text-align: center;
             line-height: 44px;
             color: #ccc;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: bold;
             cursor: pointer;
-            border-right: 1px solid #333;
+            padding: 0 10px;
         }
 
         #navbar li.active {
             background: linear-gradient(to bottom, #111111 0%, #444 100%);
             color: #fff;
+            border-bottom: 2px solid #fbff00;
         }
 
         #content { 
-            max-width: 700px; 
-            margin: 50px auto; 
+            max-width: 650px; 
+            margin: 40px auto; 
             padding: 30px;
-            background: rgba(0, 43, 85, 0.7);
-            border-radius: 12px;
+            background: rgba(0, 43, 85, 0.6);
+            border-radius: 10px;
             border: 1px solid rgba(255,255,255,0.1);
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        h2 { color: #fbff00; text-align: center; font-size: 28px; }
+        h2 { color: #fbff00; text-align: center; margin-top: 0; }
 
         .log-box { 
-            background: rgba(0,0,0,0.4);
-            border: 1px solid #58a6ff;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid #fbff00;
             padding: 20px; 
-            margin: 30px 0;
+            margin: 25px 0;
             text-align: center;
             border-radius: 8px;
         }
 
-        .count-num { font-size: 40px; font-weight: bold; color: #39FF14; }
+        .count-num { font-size: 42px; font-weight: bold; color: #39FF14; }
 
         footer {
             text-align: center;
             font-size: 11px;
             color: #8b949e;
-            padding: 40px 0;
+            padding: 30px 0;
         }
     </style>
 </head>
 <body>
 
 <div id="navbar">
-    <div class="pear-logo-css"></div>
+    <div class="apple-icon"></div>
     <ul>
         <li>5D</li>
         <li>Pear</li>
@@ -119,11 +107,35 @@
     <h2>Pear Inc.</h2>
     <p align="center"><i>"Universal Intelligence & 5D Memory"</i></p>
     
-    <hr style="border: 0; border-top: 1px solid #004080; margin: 25px 0;">
+    <hr style="border: 0; border-top: 1px solid #004080; margin: 20px 0;">
 
-    <p style="line-height: 1.6;">La Memoria 5D no se enseña, se recuerda. El universo opera sobre el trabajo previo de dimensiones pasadas. Gestionando la base de datos de Luca para el futuro de la inteligencia.</p>
+    <p style="font-size: 14px; line-height: 1.5;">La sabiduría es información auto-impuesta. Gestionando los Teseractos y el legado de Luca para la evolución del sistema.</p>
 
     <div class="log-box">
-        <p style="font-size: 11px; color: #fbff00; margin: 0 0 10px 0; letter-spacing: 1.5px;">CYDIA PACKET REQUESTS</p>
-        <span id="contador-dinamico" class="count-num">---</span>
-        <p id="status-text" style="font-size: 1
+        <p style="font-size: 11px; color: #fbff00; margin: 0 0 10px 0; letter-spacing: 1px;">PETICIONES AL TESERACTO (CYDIA)</p>
+        <span id="contador-dinamico" class="count-num">26</span>
+        <p id="status-text" style="font-size: 11px; margin-top: 10px; color: #ccc;"></p>
+    </div>
+
+    <p align="center" style="font-size: 12px;"><b>URL:</b> https://nicowtnow.github.io/Mac/</p>
+</div>
+
+<footer>
+    <p>Released under the MIT License</p>
+    <p>&copy; 2026 Pear Inc. - Nico. Todos los derechos reservados.</p>
+</footer>
+
+<script type="text/javascript">
+    function actualizarSistema() {
+        const ahora = new Date();
+        const inicio = new Date(ahora.getFullYear(), 0, 1);
+        const dias = Math.floor((ahora - inicio) / 86400000);
+        const semana = Math.ceil(dias / 7);
+        
+        // El día de descanso cambia cada semana (0-6)
+        const diaDescanso = semana % 7; 
+        
+        if (ahora.getDay() === diaDescanso) {
+            document.getElementById('contador-dinamico').innerHTML = "STANDBY";
+            document.getElementById('status-text').innerHTML = "Ciclo de mantenimiento aleatorio. Memoria 5D en reposo.";
+            return;
