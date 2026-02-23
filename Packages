@@ -2,13 +2,48 @@ Package: com.rpetrich.cylinder
 Version: 1.1
 Architecture: iphoneos-arm
 Maintainer: Nico <guzcaz060513@gmail.com>
-Depends: mobilesubstrate (>= 0.9.5000), preferenceloader (>= 2.2.2)
-Filename: Files/cylinder/com.rpetrich.cylinder_1.1_iphoneos-arm.deb
+Filename: Files/cylinder.deb
 Size: 154620
-MD5sum: 1e2f3g4h5i6j7k8l9m0n1o2p3q4r5s6t
-SHA1: 1e2f3g4h5i6j7k8l9m0n1o2p3q4r5s6t7u8v9w0x
-SHA256: 1e2f3g4h5i6j7k8l9m0n1o2p3q4r5s6t7u8v9w0x1y2z3a4b5c6d7e8f9g0h1i
 Section: Tweaks
-Description: Animaciones para los iconos de tu iPhone 4. Parte del proyecto Pear Inc. Memoria 5D.
-Author: rpetrich
-Name: Cylinder (Pear Inc. Edition)
+Description: Animaciones 3D para tus iconos. El pilar de Pear Inc.
+Name: Cylinder
+
+Package: com.alexzielenski.zeppelin
+Version: 2.1.0-12
+Architecture: iphoneos-arm
+Maintainer: Nico <guzcaz060513@gmail.com>
+Filename: Files/zeppelin.deb
+Size: 450000
+Section: Tweaks
+Description: Cambia el logo del operador. Identidad universal.
+Name: Zeppelin
+
+Package: com.aaronash.barrel
+Version: 1.8.1.1-1
+Architecture: iphoneos-arm
+Maintainer: Nico <guzcaz060513@gmail.com>
+Filename: Files/barrel.deb
+Size: 320000
+Section: Tweaks
+Description: El tweak original de transiciones de iconos.
+Name: Barrel
+
+Package: com.spark.snowboard
+Version: 1.5.21-beta1
+Architecture: iphoneos-arm
+Maintainer: Nico <guzcaz060513@gmail.com>
+Filename: Files/snowboard.deb
+Size: 850000
+Section: Tweaks
+Description: Motor de temas para la interfaz de Pear Inc.
+Name: SnowBoard
+
+Package: eu.heinelt.ifile
+Version: 1.9.1-1
+Architecture: iphoneos-arm
+Maintainer: Nico <guzcaz060513@gmail.com>
+Filename: Files/ifile.deb
+Size: 2100000
+Section: Utilities
+Description: Explorador de archivos para gestionar tu teseracto.
+Name: iFile
