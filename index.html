@@ -4,68 +4,100 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <title>Pear Inc. - Repositorio</title>
     <style>
-        body { background-color: #000; color: #ccc; font-family: 'Courier New', monospace; }
-        #content { max-width: 600px; margin: 40px auto; padding: 20px; border: 1px solid #333; box-shadow: 0 0 20px rgba(0,255,0,0.1); }
-        .log-box { background: #0d1117; color: #39FF14; padding: 20px; border-radius: 10px; border: 1px solid #30363d; text-align: center; }
-        .count-num { font-size: 38px; font-weight: bold; text-shadow: 0 0 10px rgba(57, 255, 20, 0.5); }
-        .info-text { font-size: 11px; color: #8b949e; margin-top: 10px; }
+        /* Estética azul marino solicitada */
+        body { 
+            background-color: #001f3f; 
+            color: #ffffff; 
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; 
+            margin: 0;
+            padding: 20px;
+        }
+        #content { 
+            max-width: 650px; 
+            margin: auto; 
+            border: 1px solid #003366; 
+            padding: 20px;
+            background-color: #002b55;
+        }
+        h2, h3 { color: #fbff00; } /* Títulos en amarillo para resaltar */
+        .log-box { 
+            border: 1px solid #ffffff; 
+            padding: 15px; 
+            margin: 20px 0;
+            text-align: center;
+        }
+        .count-num { 
+            font-size: 35px; 
+            font-weight: bold; 
+            display: block;
+            margin: 10px 0;
+        }
+        hr { border: 0.5px solid #004080; }
     </style>
 </head>
 <body>
 
 <div id="content">
     <div align="center">
-        <h2>PEAR INC. SYSTEMS</h2>
-        <p style="color: #fbff00;"><i>"Universal Intelligence & 5D Memory"</i></p>
+        <h2>Pear Inc. Repo</h2>
+        <p><i>"Universal Intelligence & 5D Memory"</i></p>
     </div>
     
-    <hr style="border: 0.5px solid #333;">
+    <p>Bienvenido al repositorio oficial de Nico. Aquí se gestiona el trabajo previo de Luca y la evolución de los Teseractos en iOS.</p>
     
+    <hr>
+    
+    <h3>Instalación:</h3>
+    <p>URL: <b>https://nicowtnow.github.io/Mac/</b></p>
+
     <div class="log-box">
-        <p style="margin: 0; font-size: 12px; color: #8b949e; letter-spacing: 2px;">LOG DE PETICIONES DE RED</p>
-        <h3 style="margin: 15px 0; color: #c9d1d9;">Cydia Requests:</h3>
-        
-        <div id="contador-dinamico" class="count-num">Calculando...</div>
-        
-        <p id="status-text" class="info-text"></p>
+        <p style="font-size: 14px; margin: 0;">ESTADO DE PETICIONES (CYDIA):</p>
+        <span id="contador-dinamico" class="count-num">Cargando datos...</span>
+        <p id="status-text" style="font-size: 12px; margin: 0; color: #aaa;"></p>
     </div>
 
-    <script type="text/javascript">
-        function generarPeticiones() {
-            const ahora = new Date();
-            const inicioAño = new Date(ahora.getFullYear(), 0, 1);
-            const diasPasados = Math.floor((ahora - inicioAño) / (24 * 60 * 60 * 1000));
-            const semanaActual = Math.ceil(diasPasados / 7);
-            
-            // 1. Determinar el día de descanso aleatorio de esta semana (0-6)
-            // Usamos la semana del año como "semilla" para que el día cambie cada semana pero sea el mismo hoy
-            const diaDescanso = semanaActual % 7; 
-            const hoy = ahora.getDay();
+    <hr>
+    <p align="center">Proyecto escolar de Nico - 2026</p>
+</div>
 
-            if (hoy === diaDescanso) {
-                document.getElementById('contador-dinamico').innerHTML = "SYSTEM STANDBY";
-                document.getElementById('status-text').innerHTML = "Ciclo de inactividad aleatorio detectado. Sincronización pausada.";
-                return;
-            }
+<script type="text/javascript">
+    function gestionarSistema() {
+        const ahora = new Date();
+        const inicioAño = new Date(ahora.getFullYear(), 0, 1);
+        const diasPasados = Math.floor((ahora - inicioAño) / (24 * 60 * 60 * 1000));
+        const semanaActual = Math.ceil(diasPasados / 7);
+        
+        // El día de descanso cambia cada semana (0-6)
+        const diaDescanso = semanaActual % 7; 
+        const hoy = ahora.getDay();
 
-            // 2. Base fija
-            let total = 142;
-            
-            // 3. Generar aumentos aleatorios basados en tus números (58, 46, 97)
-            const horaActual = ahora.getHours();
-            const bloquesPasados = Math.floor(horaActual / 4);
-            
-            // Usamos una función pseudo-aleatoria basada en la fecha para que no cambie al refrescar la página
-            function getRandomParaBloque(bloque) {
-                const seed = diasPasados + bloque;
-                const x = Math.sin(seed) * 10000;
-                const random = x - Math.floor(x);
-                return Math.floor(random * (100 - 40 + 1)) + 40; // Números entre 40 y 100
-            }
+        if (hoy === diaDescanso) {
+            document.getElementById('contador-dinamico').innerHTML = "SYSTEM STANDBY";
+            document.getElementById('status-text').innerHTML = "Ciclo de mantenimiento aleatorio. Hoy no se registran peticiones.";
+            return;
+        }
 
-            for (let i = 0; i < bloquesPasados; i++) {
-                total += getRandomParaBloque(i);
-            }
+        let base = 142;
+        const horaActual = ahora.getHours();
+        const bloques = Math.floor(horaActual / 4);
+        
+        // Números aleatorios basados en tus rangos (58, 46, 97...)
+        function getAleatorio(semilla) {
+            const x = Math.sin(diasPasados + semilla) * 10000;
+            return Math.floor((x - Math.floor(x)) * (98 - 45 + 1)) + 45;
+        }
 
-            document.getElementById('contador-dinamico').innerHTML = total;
-            document.getElementById('status-text').innerHTML = "Conexión estable. " + (bloquesPasados + 1) + "º ciclo
+        let extra = 0;
+        for (let i = 0; i < bloques; i++) {
+            extra += getAleatorio(i);
+        }
+
+        document.getElementById('contador-dinamico').innerHTML = base + extra;
+        document.getElementById('status-text').innerHTML = "Peticiones procesadas en las últimas " + (bloques * 4) + " horas.";
+    }
+
+    gestionarSistema();
+</script>
+
+</body>
+</html>
