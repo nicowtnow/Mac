@@ -12,14 +12,12 @@
             font-family: "Lucida Grande", sans-serif; 
             margin: 0; padding: 0; min-height: 100vh;
         }
-
         #navbar {
             background: linear-gradient(to bottom, #454545 0%, #111111 100%);
             height: 44px; border-bottom: 1px solid #000;
             display: flex; align-items: center; padding: 0 15px;
             position: sticky; top: 0; z-index: 1000;
         }
-
         .apple-icon { font-size: 20px; color: white; margin-right: 15px; }
         #navbar ul { list-style: none; margin: 0; padding: 0; display: flex; flex: 1; height: 100%; }
         #navbar li {
@@ -36,10 +34,8 @@
             box-shadow: 0 15px 35px rgba(0,0,0,0.4);
             text-align: center;
         }
-
         .section { display: none; }
         .section.active { display: block; }
-
         .log-box { 
             background: rgba(0,0,0,0.3); border: 2px solid #ffffff;
             padding: 25px; margin: 20px 0; border-radius: 10px;
@@ -51,14 +47,13 @@
             transform: translateX(-50%); background: #ffffff; color: #000;
             padding: 10px 20px; border-radius: 20px; font-size: 13px; font-weight: bold; z-index: 2000;
         }
-
         footer { text-align: center; padding: 40px 0; }
         .nico-credit { color: #666; font-size: 11px; cursor: pointer; padding: 10px; }
     </style>
 </head>
 <body>
 
-<div id="toast">SINCRONIZACIÓN UNIVERSAL</div>
+<div id="toast">SINCRONIZACIÓN UNIVERSAL ACTIVA</div>
 
 <div id="navbar">
     <div class="apple-icon"></div>
@@ -72,30 +67,30 @@
 
 <div id="main-container">
     <div id="sec-cydia" class="section active">
-        <h2>Repo Pear Inc.</h2>
+        <h2>Servidor Pear Inc.</h2>
         <div class="log-box">
-            <p style="font-size: 10px; color: #aaa; margin: 0; letter-spacing: 2px;">LIVE SERVER REQUESTS</p>
+            <p style="font-size: 10px; color: #aaa; margin: 0; letter-spacing: 2px;">LIVE REQUESTS (CYDIA)</p>
             <div id="contador-dinamico" class="count-num">---</div>
-            <p style="font-size: 11px; color: #39FF14; margin: 5px 0 0 0;">MODO: TIEMPO ACELERADO</p>
+            <p style="font-size: 11px; color: #39FF14; margin: 5px 0 0 0;">STATUS: CONSTANT STREAM</p>
         </div>
-        <p style="font-size: 12px; color: #888;">Repo: nicowtnow.github.io/Mac/</p>
+        <p style="font-size: 12px; color: #888;">https://nicowtnow.github.io/Mac/</p>
     </div>
 
     <div id="sec-pear" class="section">
         <h2>Corporación Pear Inc.</h2>
-        <p style="font-size: 13px; text-align: justify; line-height: 1.6;">Desarrollo de <b>theztap</b> y el OS de Pearphone en C++. Basado en la teoría del Teseracto.</p>
+        <p style="font-size: 13px; text-align: justify; line-height: 1.6;">Desarrollo de <b>theztap</b> y el OS de Pearphone en C++. Todo basado en la infraestructura del Teseracto.</p>
     </div>
 
     <div id="sec-5d" class="section">
         <h2>Memoria 5D</h2>
         <p style="font-size: 14px; font-style: italic; text-align: justify; border-left: 3px solid #39FF14; padding-left: 15px;">
-            "La sabiduría es información auto-impuesta, no externa."
+            "La sabiduría es información auto-impuesta, no externa. El universo opera sobre el trabajo de dimensiones previas."
         </p>
     </div>
 
     <div id="sec-xt" class="section">
         <h2>Pearphone XT</h2>
-        <p style="font-size: 13px;">Kernel: <b>C++ (PearCore)</b></p>
+        <p style="font-size: 13px;">Kernel: <b>C++ (PearCore)</b><br>Architecture: <b>Teseracto 5D</b></p>
     </div>
 </div>
 
@@ -124,22 +119,24 @@
     const serverRef = database.ref('servidor');
     const patronSuma = [44, 72, 25, 83];
 
-    // Escuchar la nube (Sincronización en tiempo real)
+    // Sincronización en vivo con la nube
     serverRef.on('value', (snapshot) => {
         const data = snapshot.val();
         if (data) {
             document.getElementById('contador-dinamico').innerText = data.peticiones;
         } else {
+            // Valor inicial de Nico
             serverRef.set({ peticiones: 277, index: 0 });
         }
     });
 
-    // Función de suma automática cada 30 segundos (Sin reinicio)
+    // Suma automática cada 30 segundos (No se detiene nunca)
     setInterval(() => {
         serverRef.transaction((currentData) => {
             if (currentData) {
                 let n = parseInt(currentData.peticiones) + patronSuma[currentData.index % patronSuma.length];
-                if (n >= 1000) n = 277; // Big Grand Reset
+                // El Big Grand Reset ocurre al llegar a 1000
+                if (n >= 1000) n = 277; 
                 currentData.peticiones = n;
                 currentData.index = (currentData.index + 1) % patronSuma.length;
             }
