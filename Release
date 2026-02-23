@@ -1,8 +1,8 @@
 Origin: Pear Inc.
 Label: Pear Inc.
-Suite: stable
+Suite: ./
 Version: 4.0
 Codename: Mac
 Architectures: iphoneos-arm
-Components: main
+Components: ./
 Description: Repositorio de Inteligencia Universal - Memoria 5D
