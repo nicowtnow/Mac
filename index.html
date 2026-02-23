@@ -139,4 +139,21 @@
             return;
         }
 
-        let total = 2
+        let total = 26; 
+        const horas = ahora.getHours();
+        const bloques = Math.floor(horas / 4);
+        
+        for (let i = 0; i < bloques; i++) {
+            const seed = diasPasados + i;
+            const x = Math.sin(seed) * 10000;
+            total += Math.floor((x - Math.floor(x)) * 50) + 20; 
+        }
+
+        document.getElementById('contador-dinamico').innerHTML = total;
+        document.getElementById('status-text').innerHTML = "Sincronización estable.";
+    }
+    actualizarSistema();
+</script>
+
+</body>
+</html>
