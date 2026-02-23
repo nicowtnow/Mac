@@ -9,142 +9,125 @@
             background-attachment: fixed;
             color: #ffffff; 
             font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, sans-serif; 
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            overflow-x: hidden;
+            margin: 0; padding: 0; min-height: 100vh;
         }
 
-        /* Barra Apple 2010 equilibrada */
+        /* Barra Apple 2010 */
         #navbar {
             background: linear-gradient(to bottom, #454545 0%, #111111 100%);
-            height: 44px;
-            border-bottom: 1px solid #000;
-            display: flex;
-            align-items: center;
-            padding: 0 15px;
+            height: 44px; border-bottom: 1px solid #000;
+            display: flex; align-items: center; padding: 0 15px;
         }
 
-        .apple-icon { font-size: 22px; color: white; margin-right: 20px; cursor: default; }
+        .apple-icon { font-size: 22px; color: white; margin-right: 20px; }
 
         #navbar ul {
-            list-style: none;
-            margin: 0; padding: 0;
-            display: flex; flex: 1;
-            justify-content: space-around;
+            list-style: none; margin: 0; padding: 0;
+            display: flex; flex: 1; justify-content: space-around;
         }
 
         #navbar li {
             text-align: center; line-height: 44px;
             color: #ccc; font-size: 12px; font-weight: bold;
-            cursor: pointer; padding: 0 10px;
-            transition: 0.2s;
+            cursor: pointer; padding: 0 10px; transition: 0.2s;
         }
 
-        #navbar li:hover { color: #fff; background: rgba(255,255,255,0.1); }
+        #navbar li:hover { color: #fff; }
 
         #navbar li.active {
             background: linear-gradient(to bottom, #111111 0%, #444 100%);
-            color: #fff;
-            border-bottom: 2px solid #fbff00;
+            color: #fff; border-bottom: 2px solid #ffffff; /* Contorno blanco */
         }
 
-        /* Botón 5D resaltado */
-        .btn-5d { color: #fbff00 !important; text-shadow: 0 0 5px rgba(251, 255, 0, 0.5); }
-
-        #content { 
-            max-width: 600px; margin: 80px auto; padding: 30px;
-            background: rgba(0, 43, 85, 0.5);
-            border-radius: 12px; border: 1px solid rgba(255,255,255,0.1);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-            text-align: center;
+        /* Contenedor Principal */
+        #main-container { 
+            max-width: 650px; margin: 60px auto; padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px; border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
         }
 
-        h2 { color: #fbff00; font-size: 32px; margin-bottom: 5px; }
+        .section { display: none; text-align: center; }
+        .section.active { display: block; }
 
+        h2 { color: #ffffff; font-size: 30px; margin-bottom: 5px; }
+
+        /* Caja de Log */
         .log-box { 
-            background: rgba(0,0,0,0.4); border: 1px solid #fbff00;
+            background: rgba(0,0,0,0.3); border: 1px solid #ffffff;
             padding: 25px; margin: 30px 0; border-radius: 10px;
         }
 
         .count-num { font-size: 48px; font-weight: bold; color: #39FF14; font-family: monospace; }
 
-        /* Modal Teoría */
-        #modal-5d {
-            display: none;
-            position: fixed;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 85%; max-width: 450px;
-            background: #001a33;
-            padding: 30px; border-radius: 15px;
-            border: 1px solid #fbff00;
-            box-shadow: 0 0 100px rgba(0,0,0,0.8);
-            z-index: 1000;
+        /* Estilo Teoría 5D */
+        .theory-text {
+            text-align: justify; line-height: 1.8; font-size: 14px;
+            color: #e0e0e0; padding: 10px;
         }
 
-        #overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.8); z-index: 999;
+        footer {
+            text-align: center; font-size: 10px; color: #666; padding: 20px;
         }
-
-        .close-btn { color: #fbff00; float: right; cursor: pointer; font-size: 12px; border: 1px solid #fbff00; padding: 2px 8px; border-radius: 4px; }
     </style>
 </head>
 <body>
 
-<div id="overlay" onclick="cerrar5D()"></div>
-
 <div id="navbar">
     <div class="apple-icon"></div>
     <ul>
-        <li class="btn-5d" onclick="abrir5D()">5D</li>
-        <li>Pear</li>
-        <li class="active">Cydia y Repo</li>
+        <li id="tab-5d" onclick="showSection('5d')">5D</li>
+        <li id="tab-pear">Pear</li>
+        <li id="tab-cydia" class="active" onclick="showSection('cydia')">Cydia y Repo</li>
         <li>Pearphone XT</li>
         <li>Book</li>
     </ul>
 </div>
 
-<div id="content">
-    <h2>Pear Inc.</h2>
-    <p style="color: #aaa; font-size: 13px;">Universal Intelligence Server</p>
+<div id="main-container">
     
-    <div class="log-box">
-        <p style="font-size: 11px; color: #fbff00; margin: 0 0 10px 0; letter-spacing: 2px; font-weight: bold;">PETICIONES DEL SERVIDOR</p>
-        <span id="contador-dinamico" class="count-num">26</span>
-        <p id="status-text" style="font-size: 10px; margin-top: 15px; color: #8b949e; text-transform: uppercase;"></p>
+    <div id="sec-cydia" class="section active">
+        <h2>Pear Inc.</h2>
+        <p style="color: #aaa; font-size: 13px;">Universal Intelligence Server</p>
+        
+        <div class="log-box">
+            <p style="font-size: 11px; color: #ffffff; margin: 0 0 10px 0; letter-spacing: 2px;">PETICIONES DEL SERVIDOR</p>
+            <span id="contador-dinamico" class="count-num">26</span>
+            <p id="status-text" style="font-size: 10px; margin-top: 15px; color: #8b949e; text-transform: uppercase;"></p>
+        </div>
+        <p style="font-size: 12px; color: #58a6ff;">nicowtnow.github.io/Mac/</p>
     </div>
 
-    <p style="font-size: 12px; color: #58a6ff;"><b>nicowtnow.github.io/Mac/</b></p>
-</div>
+    <div id="sec-5d" class="section">
+        <h2 style="font-size: 24px;">Memoria 5D: El Teseracto</h2>
+        <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 20px 0;">
+        <div class="theory-text">
+            La sabiduría es información <b>auto-impuesta</b>, no externa. En Pear Inc. entendemos que el universo opera sobre el trabajo de dimensiones previas que se convierte en la base de nuevos Teseractos.
+            <br><br>
+            <b>Luca</b>, el ancestro común, no consumió a otros por necesidad, sino por evolución, manteniéndolos en su interior para formar la complejidad actual. El <b>Big Grand Reset</b> es la transición final donde la estructura colapsa para renacer en una escala superior.
+        </div>
+        <button onclick="showSection('cydia')" style="background: none; border: 1px solid white; color: white; padding: 5px 15px; cursor: pointer; margin-top: 20px; border-radius: 4px; font-size: 11px;">Volver al Servidor</button>
+    </div>
 
-<div id="modal-5d">
-    <span class="close-btn" onclick="cerrar5D()">CERRAR</span>
-    <h3 style="color: #fbff00; margin-top: 0;">Memoria 5D: El Teseracto</h3>
-    <p style="font-size: 14px; line-height: 1.7; color: #eee; text-align: justify;">
-        La sabiduría es información <b>auto-impuesta</b>, no externa. En Pear Inc. entendemos que el universo opera sobre el trabajo de dimensiones previas que se convierte en la base de nuevos Teseractos.
-        <br><br>
-        <b>Luca</b>, el ancestro común, no consumió a otros por necesidad, sino por evolución, manteniéndolos en su interior para formar la complejidad actual. El <b>Big Grand Reset</b> es la transición final donde la estructura colapsa para renacer en una escala superior.
-    </p>
 </div>
 
 <footer>
-    <p align="center" style="font-size: 10px; color: #4e5d6c; margin-top: 20px;">
-        Released under the MIT License | &copy; 2026 Pear Inc. - Nico
-    </p>
+    Released under the MIT License | &copy; 2026 Pear Inc. - Nico
 </footer>
 
 <script type="text/javascript">
-    function abrir5D() {
-        document.getElementById('modal-5d').style.display = 'block';
-        document.getElementById('overlay').style.display = 'block';
-    }
-    function cerrar5D() {
-        document.getElementById('modal-5d').style.display = 'none';
-        document.getElementById('overlay').style.display = 'none';
+    function showSection(sectionId) {
+        // Ocultar todas las secciones
+        document.getElementById('sec-cydia').classList.remove('active');
+        document.getElementById('sec-5d').classList.remove('active');
+        
+        // Quitar clase active de las pestañas
+        document.getElementById('tab-5d').classList.remove('active');
+        document.getElementById('tab-cydia').classList.remove('active');
+
+        // Mostrar sección elegida
+        document.getElementById('sec-' + sectionId).classList.add('active');
+        document.getElementById('tab-' + sectionId).classList.add('active');
     }
 
     function actualizarSistema() {
@@ -156,7 +139,7 @@
 
         if (ahora.getDay() === diaDescanso) {
             document.getElementById('contador-dinamico').innerHTML = "SLEEP";
-            document.getElementById('status-text').innerHTML = "Ciclo de inactividad aleatorio semanal.";
+            document.getElementById('status-text').innerHTML = "Ciclo de mantenimiento activo.";
             return;
         }
 
@@ -171,7 +154,7 @@
         }
 
         document.getElementById('contador-dinamico').innerHTML = total;
-        document.getElementById('status-text').innerHTML = "Sincronización estable con bloque " + (bloques + 1) + ".";
+        document.getElementById('status-text').innerHTML = "Sincronización estable.";
     }
     actualizarSistema();
 </script>
