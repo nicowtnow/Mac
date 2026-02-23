@@ -4,22 +4,47 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <title>Pear Inc. - Repositorio</title>
     <style>
+        /* Degradado azul marino de arriba hacia abajo */
         body { 
-            background-color: #001f3f; 
+            background: linear-gradient(to bottom, #003366 0%, #001a33 100%);
+            background-attachment: fixed;
             color: #ffffff; 
-            font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif; 
+            font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, sans-serif; 
             margin: 0;
             padding: 0;
+            min-height: 100vh;
         }
 
-        /* Barra de navegación equilibrada Pear Inc. */
+        /* Barra de navegación estilo Apple 2010 */
         #navbar {
             background: linear-gradient(to bottom, #454545 0%, #111111 100%);
             height: 44px;
             border-bottom: 1px solid #000;
             display: flex;
-            justify-content: center;
             align-items: center;
+            padding: 0 10px;
+        }
+
+        /* Logo de Pear en CSS (a la izquierda) */
+        .pear-logo-css {
+            width: 16px;
+            height: 18px;
+            background: #fff;
+            border-radius: 8px 8px 10px 10px;
+            position: relative;
+            margin-right: 15px;
+            margin-left: 10px;
+        }
+        .pear-logo-css:before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            right: 3px;
+            width: 5px;
+            height: 7px;
+            background: #fff;
+            border-radius: 0 100% 0 0;
+            transform: rotate(25deg);
         }
 
         #navbar ul {
@@ -27,97 +52,64 @@
             margin: 0;
             padding: 0;
             display: flex;
-            width: 100%;
-            max-width: 900px;
+            flex: 1;
         }
 
         #navbar li {
-            flex: 1; /* Esto equilibra el tamaño de todas las pestañas */
+            flex: 1;
             text-align: center;
             line-height: 44px;
             color: #ccc;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: bold;
             cursor: pointer;
             border-right: 1px solid #333;
-            transition: background 0.3s;
         }
 
-        #navbar li:first-child { border-left: 1px solid #333; }
-
-        /* Pestaña activa */
         #navbar li.active {
-            background: linear-gradient(to bottom, #111111 0%, #454545 100%);
+            background: linear-gradient(to bottom, #111111 0%, #444 100%);
             color: #fff;
-        }
-
-        /* Logo de Pear simplificado */
-        .pear-logo {
-            display: inline-block;
-            width: 12px;
-            height: 14px;
-            background: #fff;
-            border-radius: 6px 6px 6px 6px;
-            position: relative;
-            margin-right: 5px;
-            vertical-align: middle;
-        }
-        .pear-logo:after {
-            content: '';
-            position: absolute;
-            top: -4px;
-            right: 2px;
-            width: 4px;
-            height: 6px;
-            background: #fff;
-            border-radius: 0 100% 0 0;
-            transform: rotate(20deg);
         }
 
         #content { 
             max-width: 700px; 
-            margin: 40px auto; 
+            margin: 50px auto; 
             padding: 30px;
-            background-color: #002b55;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-            border: 1px solid #004080;
+            background: rgba(0, 43, 85, 0.7);
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
-        h2 { color: #fbff00; text-align: center; margin-top: 0; }
+        h2 { color: #fbff00; text-align: center; font-size: 28px; }
 
         .log-box { 
-            border: 1px solid rgba(255,255,255,0.2); 
-            background: rgba(0,0,0,0.3);
+            background: rgba(0,0,0,0.4);
+            border: 1px solid #58a6ff;
             padding: 20px; 
-            margin: 25px 0;
+            margin: 30px 0;
             text-align: center;
-            border-radius: 10px;
+            border-radius: 8px;
         }
 
-        .count-num { 
-            font-size: 38px; 
-            font-weight: bold; 
-            color: #39FF14; /* Verde neón para las peticiones */
-            display: block;
-        }
+        .count-num { font-size: 40px; font-weight: bold; color: #39FF14; }
 
         footer {
             text-align: center;
             font-size: 11px;
             color: #8b949e;
-            margin-top: 50px;
-            padding-bottom: 30px;
+            padding: 40px 0;
         }
     </style>
 </head>
 <body>
 
 <div id="navbar">
+    <div class="pear-logo-css"></div>
     <ul>
         <li>5D</li>
         <li>Pear</li>
-        <li class="active"><span class="pear-logo"></span>Cydia y Repo</li>
+        <li class="active">Cydia y Repo</li>
         <li>Pearphone XT</li>
         <li>Book</li>
     </ul>
@@ -127,62 +119,11 @@
     <h2>Pear Inc.</h2>
     <p align="center"><i>"Universal Intelligence & 5D Memory"</i></p>
     
-    <hr style="border: 0.5px solid #004080; margin: 20px 0;">
+    <hr style="border: 0; border-top: 1px solid #004080; margin: 25px 0;">
 
-    <p>Sincronización de la Memoria 5D: La sabiduría es información auto-impuesta. Gestionando el trabajo previo de Luca para el hardware del futuro.</p>
+    <p style="line-height: 1.6;">La Memoria 5D no se enseña, se recuerda. El universo opera sobre el trabajo previo de dimensiones pasadas. Gestionando la base de datos de Luca para el futuro de la inteligencia.</p>
 
     <div class="log-box">
-        <p style="font-size: 12px; color: #fbff00; margin: 0; letter-spacing: 1px;">PAQUETES SOLICITADOS AL TESERACTO</p>
+        <p style="font-size: 11px; color: #fbff00; margin: 0 0 10px 0; letter-spacing: 1.5px;">CYDIA PACKET REQUESTS</p>
         <span id="contador-dinamico" class="count-num">---</span>
-        <p id="status-text" style="font-size: 11px; margin-top: 10px; color: #ccc;"></p>
-    </div>
-
-    <p style="font-size: 13px; text-align: center;">Servidor de Red: <b>https://nicowtnow.github.io/Mac/</b></p>
-</div>
-
-<footer>
-    <p>Released under the MIT License</p>
-    <p>&copy; 2026 Pear Inc. - Nico. Todos los derechos reservados.</p>
-</footer>
-
-<script type="text/javascript">
-    function gestionarSistema() {
-        const ahora = new Date();
-        const inicioAño = new Date(ahora.getFullYear(), 0, 1);
-        const diasPasados = Math.floor((ahora - inicioAño) / (24 * 60 * 60 * 1000));
-        const semanaActual = Math.ceil(diasPasados / 7);
-        
-        // El día de descanso cambia cada semana
-        const diaDescanso = semanaActual % 7; 
-        const hoy = ahora.getDay();
-
-        if (hoy === diaDescanso) {
-            document.getElementById('contador-dinamico').innerHTML = "SLEEP MODE";
-            document.getElementById('status-text').innerHTML = "Estado: Ciclo de descanso de la Memoria 5D.";
-            return;
-        }
-
-        let base = 142;
-        const horaActual = ahora.getHours();
-        const bloques = Math.floor(horaActual / 4);
-        
-        // Generador aleatorio basado en tus bloques
-        function getAleatorio(semilla) {
-            const x = Math.sin(diasPasados + semilla) * 10000;
-            return Math.floor((x - Math.floor(x)) * (98 - 45 + 1)) + 45;
-        }
-
-        let extra = 0;
-        for (let i = 0; i < bloques; i++) {
-            extra += getAleatorio(i);
-        }
-
-        document.getElementById('contador-dinamico').innerHTML = base + extra;
-        document.getElementById('status-text').innerHTML = "Peticiones detectadas en el bloque actual de 4 horas.";
-    }
-
-    gestionarSistema();
-</script>
-
-</body>
-</html>
+        <p id="status-text" style="font-size: 1
