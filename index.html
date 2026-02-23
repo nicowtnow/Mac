@@ -8,8 +8,7 @@
         body { 
             background: linear-gradient(to bottom, #003366 0%, #001a33 100%);
             background-attachment: fixed;
-            color: #ffffff; 
-            font-family: "Lucida Grande", sans-serif; 
+            color: #ffffff; font-family: "Lucida Grande", sans-serif; 
             margin: 0; padding: 0; min-height: 100vh;
         }
         #navbar {
@@ -22,16 +21,21 @@
         #navbar ul { list-style: none; margin: 0; padding: 0; display: flex; flex: 1; height: 100%; }
         #navbar li {
             flex: 1; text-align: center; line-height: 44px;
-            color: #ccc; font-size: 11px; font-weight: bold;
-            cursor: pointer; border-right: 1px solid #333;
+            color: #ccc; font-size: 11px; font-weight: bold; cursor: pointer; border-right: 1px solid #333;
         }
-        #navbar li.active { background: linear-gradient(to bottom, #111111 0%, #444 100%); color: #fff; border-bottom: 2px solid #ffffff; }
+        #navbar li.active { background: linear-gradient(to bottom, #111111 0%, #444 100%); color: #fff; }
+
+        /* MONITOR DISCRETO EN LA BARRA */
+        #monitor-top {
+            width: 70px; text-align: center; color: #39FF14;
+            font-family: monospace; font-size: 10px; border-left: 1px solid #333;
+            height: 44px; line-height: 44px; background: rgba(0,0,0,0.3);
+        }
 
         #main-container { 
             max-width: 600px; margin: 40px auto; padding: 25px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px; border: 1px solid rgba(255,255,255,0.2);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            background: rgba(255, 255, 255, 0.05); border-radius: 12px; 
+            border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 15px 35px rgba(0,0,0,0.4);
             text-align: center;
         }
         .section { display: none; }
@@ -45,15 +49,16 @@
         #toast {
             display: none; position: fixed; top: 60px; left: 50%;
             transform: translateX(-50%); background: #ffffff; color: #000;
-            padding: 10px 20px; border-radius: 20px; font-size: 13px; font-weight: bold; z-index: 2000;
+            padding: 10px 20px; border-radius: 20px; font-size: 12px; font-weight: bold; z-index: 2000;
         }
+
         footer { text-align: center; padding: 40px 0; }
-        .nico-credit { color: #666; font-size: 11px; cursor: pointer; padding: 10px; }
+        .nico-credit { color: #666; font-size: 11px; cursor: pointer; padding: 10px; display: inline-block; }
     </style>
 </head>
 <body>
 
-<div id="toast">SINCRONIZACIÓN UNIVERSAL ACTIVA</div>
+<div id="toast">Aquí no está</div>
 
 <div id="navbar">
     <div class="apple-icon"></div>
@@ -63,39 +68,29 @@
         <li id="tab-cydia" class="active" onclick="showSection('cydia')">Cydia</li>
         <li id="tab-xt" onclick="showSection('xt')">XT</li>
     </ul>
+    <div id="monitor-top">---</div>
 </div>
 
 <div id="main-container">
     <div id="sec-cydia" class="section active">
         <h2>Servidor Pear Inc.</h2>
         <div class="log-box">
-            <p style="font-size: 10px; color: #aaa; margin: 0; letter-spacing: 2px;">LIVE REQUESTS (CYDIA)</p>
+            <p style="font-size: 10px; color: #aaa; margin: 0; letter-spacing: 2px;">LIVE REQUESTS</p>
             <div id="contador-dinamico" class="count-num">---</div>
-            <p style="font-size: 11px; color: #39FF14; margin: 5px 0 0 0;">STATUS: CONSTANT STREAM</p>
         </div>
-        <p style="font-size: 12px; color: #888;">https://nicowtnow.github.io/Mac/</p>
     </div>
-
-    <div id="sec-pear" class="section">
-        <h2>Corporación Pear Inc.</h2>
-        <p style="font-size: 13px; text-align: justify; line-height: 1.6;">Desarrollo de <b>theztap</b> y el OS de Pearphone en C++. Todo basado en la infraestructura del Teseracto.</p>
-    </div>
-
+    
     <div id="sec-5d" class="section">
         <h2>Memoria 5D</h2>
-        <p style="font-size: 14px; font-style: italic; text-align: justify; border-left: 3px solid #39FF14; padding-left: 15px;">
-            "La sabiduría es información auto-impuesta, no externa. El universo opera sobre el trabajo de dimensiones previas."
-        </p>
+        <p style="font-size: 14px; font-style: italic;">"La sabiduría es información auto-impuesta."</p>
     </div>
 
-    <div id="sec-xt" class="section">
-        <h2>Pearphone XT</h2>
-        <p style="font-size: 13px;">Kernel: <b>C++ (PearCore)</b><br>Architecture: <b>Teseracto 5D</b></p>
-    </div>
+    <div id="sec-pear" class="section"><h2>Pear Inc.</h2><p>Desarrollo de hardware y software 5D.</p></div>
+    <div id="sec-xt" class="section"><h2>XT</h2><p>Sistema Operativo C++.</p></div>
 </div>
 
 <footer>
-    <div class="nico-credit" onclick="triggerMagic()">
+    <div class="nico-credit" onclick="triggerSecret()">
         &copy; 2026 Pear Inc. - <b>Nico 2026</b>
     </div>
 </footer>
@@ -119,33 +114,66 @@
     const serverRef = database.ref('servidor');
     const patronSuma = [44, 72, 25, 83];
 
-    // Sincronización en vivo con la nube
+    let rondasRapidas = 0;
+    let tiempoRestante = 0;
+    let timerInterval;
+
     serverRef.on('value', (snapshot) => {
         const data = snapshot.val();
-        if (data) {
-            document.getElementById('contador-dinamico').innerText = data.peticiones;
-        } else {
-            // Valor inicial de Nico
-            serverRef.set({ peticiones: 277, index: 0 });
-        }
+        if (data) { document.getElementById('contador-dinamico').innerText = data.peticiones; }
     });
 
-    // Suma automática cada 30 segundos (No se detiene nunca)
-    setInterval(() => {
+    function iniciarCiclo() {
+        let tiempoEspera;
+        let prefijo = "";
+
+        if (rondasRapidas < 2) {
+            // RS1 y RS2
+            prefijo = "RS" + (rondasRapidas + 1) + " ";
+            tiempoEspera = Math.floor(Math.random() * (20000)) + 15000;
+        } else if (rondasRapidas === 2) {
+            // RS3 (Solo tiempo, sin texto)
+            prefijo = "";
+            tiempoEspera = Math.floor(Math.random() * (20000)) + 15000;
+        } else {
+            // RL (2 min)
+            prefijo = "RL ";
+            tiempoEspera = 120000;
+        }
+
+        tiempoRestante = tiempoEspera;
+        
+        if (timerInterval) clearInterval(timerInterval);
+        timerInterval = setInterval(() => {
+            tiempoRestante -= 1000;
+            let seg = Math.ceil(tiempoRestante / 1000);
+            document.getElementById('monitor-top').innerText = prefijo + seg + "s";
+
+            if (tiempoRestante <= 0) {
+                clearInterval(timerInterval);
+                ejecutarSuma();
+            }
+        }, 1000);
+    }
+
+    function ejecutarSuma() {
         serverRef.transaction((currentData) => {
             if (currentData) {
                 let n = parseInt(currentData.peticiones) + patronSuma[currentData.index % patronSuma.length];
-                // El Big Grand Reset ocurre al llegar a 1000
                 if (n >= 1000) n = 277; 
                 currentData.peticiones = n;
                 currentData.index = (currentData.index + 1) % patronSuma.length;
             }
             return currentData;
+        }, () => {
+            rondasRapidas = (rondasRapidas + 1) % 4; // 0,1,2 son rápidas, 3 es larga
+            iniciarCiclo();
         });
-    }, 30000);
+    }
 
-    function triggerMagic() {
+    function triggerSecret() {
         const toast = document.getElementById('toast');
+        toast.innerText = "Aquí no está";
         toast.style.display = 'block';
         setTimeout(() => { toast.style.display = 'none'; }, 2000);
     }
@@ -156,6 +184,8 @@
         document.getElementById('sec-' + id).classList.add('active');
         document.getElementById('tab-' + id).classList.add('active');
     }
+
+    iniciarCiclo();
 </script>
 </body>
 </html>
