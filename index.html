@@ -139,7 +139,7 @@
     }
 
     function ejecutarSuma() {
-        serverRef.transaction((d) => { if(d){ let n = parseInt(d.peticiones) + patronSuma[d.index % 4]; if (n >= 5000) n = 277; d.peticiones = n; d.index++; } return d; }, () => { rondasRapidas = (rondasRapidas + 1) % 4; iniciarCiclo(); });
+        serverRef.transaction((d) => { if(d){ let n = parseInt(d.peticiones) + patronSuma[d.index % 4]; if (n >= 15000) n = 277; d.peticiones = n; d.index++; } return d; }, () => { rondasRapidas = (rondasRapidas + 1) % 4; iniciarCiclo(); });
     }
 
     function showSection(id) {
