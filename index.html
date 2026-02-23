@@ -12,14 +12,14 @@
             margin: 0; padding: 0; min-height: 100vh;
         }
 
-        /* Barra Apple 2010 */
+        /* Barra Apple 2010 con divisiones */
         #navbar {
             background: linear-gradient(to bottom, #454545 0%, #111111 100%);
             height: 44px; border-bottom: 1px solid #000;
             display: flex; align-items: center; padding: 0 15px;
         }
 
-        .apple-icon { font-size: 22px; color: white; margin-right: 20px; }
+        .apple-icon { font-size: 22px; color: white; margin-right: 15px; }
 
         #navbar ul {
             list-style: none; margin: 0; padding: 0;
@@ -29,10 +29,13 @@
         #navbar li {
             text-align: center; line-height: 44px;
             color: #ccc; font-size: 11px; font-weight: bold;
-            cursor: pointer; padding: 0 10px; transition: 0.2s;
+            cursor: pointer; flex: 1;
+            border-right: 1px solid rgba(255,255,255,0.1); /* Divisiones entre tabs */
+            transition: 0.2s;
         }
 
-        #navbar li:hover { color: #fff; }
+        #navbar li:last-child { border-right: none; }
+        #navbar li:hover { color: #fff; background: rgba(255,255,255,0.05); }
 
         #navbar li.active {
             background: linear-gradient(to bottom, #111111 0%, #444 100%);
@@ -56,9 +59,26 @@
 
         .count-num { font-size: 48px; font-weight: bold; color: #39FF14; font-family: monospace; }
 
-        .theory-text {
-            text-align: justify; line-height: 1.8; font-size: 14px;
-            color: #e0e0e0; padding: 10px;
+        /* Modal MIT */
+        #modal-mit {
+            display: none; position: fixed;
+            top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 80%; max-width: 500px;
+            background: #fdfdfd; color: #333;
+            padding: 30px; border-radius: 8px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8); z-index: 1000;
+        }
+
+        #overlay {
+            display: none; position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7); z-index: 999;
+        }
+
+        .btn-mit {
+            background: white; color: black; border: none;
+            padding: 10px 20px; border-radius: 5px; cursor: pointer;
+            font-weight: bold; margin-top: 20px;
         }
 
         footer { text-align: center; font-size: 10px; color: #666; padding: 20px; }
@@ -66,11 +86,13 @@
 </head>
 <body>
 
+<div id="overlay" onclick="closeMIT()"></div>
+
 <div id="navbar">
     <div class="apple-icon"></div>
     <ul>
         <li id="tab-5d" onclick="showSection('5d')">5D</li>
-        <li id="tab-pear">Pear</li>
+        <li id="tab-pear" onclick="showSection('pear')">Pear</li>
         <li id="tab-cydia" class="active" onclick="showSection('cydia')">Cydia y Repo</li>
         <li id="tab-xt" onclick="showSection('xt')">Pearphone XT</li>
         <li>Book</li>
@@ -81,49 +103,71 @@
     
     <div id="sec-cydia" class="section active">
         <h2 style="color: white;">Pear Inc.</h2>
-        <p style="color: #aaa; font-size: 12px;">Universal Intelligence Server</p>
         <div class="log-box">
             <p style="font-size: 11px; color: #ffffff; margin: 0 0 10px 0; letter-spacing: 2px;">PETICIONES DEL SERVIDOR</p>
             <span id="contador-dinamico" class="count-num">26</span>
-            <p id="status-text" style="font-size: 10px; margin-top: 15px; color: #8b949e; text-transform: uppercase;"></p>
+            <p id="status-text" style="font-size: 10px; margin-top: 15px; color: #8b949e;"></p>
         </div>
         <p style="font-size: 12px; color: #58a6ff;">nicowtnow.github.io/Mac/</p>
     </div>
 
-    <div id="sec-5d" class="section">
-        <h2 style="font-size: 24px; color: white;">Memoria 5D: El Teseracto</h2>
+    <div id="sec-pear" class="section">
+        <h2 style="font-size: 24px;">Corporación Pear Inc.</h2>
         <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 20px 0;">
-        <div class="theory-text">
-            La sabiduría es información <b>auto-impuesta</b>, no externa. El universo opera sobre el trabajo de dimensiones previas que se convierte en la base de nuevos Teseractos. <b>Luca</b> integró la complejidad en su interior para evolucionar. El <b>Big Grand Reset</b> es la transición hacia una escala superior.
+        <div style="text-align: justify; font-size: 14px; line-height: 1.6;">
+            <p><b>Visión:</b> Estamos en el proceso de creación de una empresa verdadera. No solo desarrollamos software, estamos forjando el futuro del hardware.</p>
+            <p><b>En desarrollo:</b> Actualmente trabajamos en el <b>OS de Pearphone</b> y el ecosistema <b>Theztap</b>. Nuestra meta es llevar los Pearphone a la realidad física, junto con una línea completa de accesorios integrados a la Memoria 5D.</p>
+            <p style="color: #aaa; font-style: italic;">Estado: En construcción activa y desarrollo de patentes intelectuales.</p>
         </div>
+        <button class="btn-mit" onclick="openMIT()">Ver Licencia MIT</button>
+    </div>
+
+    <div id="sec-5d" class="section">
+        <h2 style="font-size: 24px;">Memoria 5D</h2>
+        <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 20px 0;">
+        <p style="text-align: justify; font-size: 14px;">La sabiduría es información auto-impuesta. El universo opera sobre el trabajo de dimensiones previas. Luca integró la complejidad para evolucionar.</p>
         <button onclick="showSection('cydia')" style="background: none; border: 1px solid white; color: white; padding: 5px 15px; cursor: pointer; margin-top: 20px; border-radius: 4px; font-size: 10px;">Volver</button>
     </div>
 
     <div id="sec-xt" class="section">
-        <h2 style="font-size: 24px; color: white;">Pearphone XT</h2>
+        <h2 style="font-size: 24px;">Pearphone XT</h2>
         <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.2); margin: 20px 0;">
-        <div style="padding: 40px 0;">
-            <p style="font-size: 18px; letter-spacing: 1px; color: #39FF14;">PRÓXIMAMENTE</p>
-            <p style="font-size: 13px; color: #aaa;">En construcción: <b>theztap</b></p>
-        </div>
-        <button onclick="showSection('cydia')" style="background: none; border: 1px solid white; color: white; padding: 5px 15px; cursor: pointer; margin-top: 10px; border-radius: 4px; font-size: 10px;">Volver</button>
+        <p style="font-size: 18px; color: #39FF14; margin-top: 30px;">PRÓXIMAMENTE</p>
+        <p style="font-size: 13px; color: #aaa;">Hardware de Próxima Generación</p>
+        <button onclick="showSection('cydia')" style="background: none; border: 1px solid white; color: white; padding: 5px 15px; cursor: pointer; margin-top: 20px; border-radius: 4px; font-size: 10px;">Volver</button>
     </div>
 
 </div>
 
+<div id="modal-mit">
+    <h3 style="margin-top: 0;">MIT License</h3>
+    <div style="font-size: 11px; height: 200px; overflow-y: scroll; border: 1px solid #ccc; padding: 10px; text-align: left;">
+        Copyright (c) 2026 Pear Inc. - Nico<br><br>
+        Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software... [Texto Completo de la Licencia MIT]...
+    </div>
+    <button onclick="closeMIT()" style="margin-top: 15px; padding: 5px 15px; cursor: pointer;">Cerrar</button>
+</div>
+
 <footer>
-    Released under the MIT License | &copy; 2026 Pear Inc. - Nico
+    &copy; 2026 Pear Inc. - Nico. Todos los derechos reservados.
 </footer>
 
 <script type="text/javascript">
     function showSection(sectionId) {
-        // Ocultar todas
         document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
         document.querySelectorAll('#navbar li').forEach(t => t.classList.remove('active'));
-        
-        // Mostrar seleccionada
         document.getElementById('sec-' + sectionId).classList.add('active');
-        document.getElementById('tab-' + (sectionId === 'xt' ? 'xt' : sectionId)).classList.add('active');
+        document.getElementById('tab-' + sectionId).classList.add('active');
+    }
+
+    function openMIT() {
+        document.getElementById('modal-mit').style.display = 'block';
+        document.getElementById('overlay').style.display = 'block';
+    }
+
+    function closeMIT() {
+        document.getElementById('modal-mit').style.display = 'none';
+        document.getElementById('overlay').style.display = 'none';
     }
 
     function actualizarSistema() {
@@ -135,22 +179,17 @@
 
         if (ahora.getDay() === diaDescanso) {
             document.getElementById('contador-dinamico').innerHTML = "SLEEP";
-            document.getElementById('status-text').innerHTML = "Ciclo de mantenimiento activo.";
             return;
         }
 
         let total = 26; 
-        const horas = ahora.getHours();
-        const bloques = Math.floor(horas / 4);
-        
+        const bloques = Math.floor(ahora.getHours() / 4);
         for (let i = 0; i < bloques; i++) {
             const seed = diasPasados + i;
             const x = Math.sin(seed) * 10000;
             total += Math.floor((x - Math.floor(x)) * 50) + 20; 
         }
-
         document.getElementById('contador-dinamico').innerHTML = total;
-        document.getElementById('status-text').innerHTML = "Sincronización estable.";
     }
     actualizarSistema();
 </script>
