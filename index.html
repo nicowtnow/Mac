@@ -1,26 +1,81 @@
-<div class="notheader">
+<html>
+<head>
+<meta name="viewport" content="width=device-width, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>JailbreakMe 3.0</title>
 
-    <div class="body1">
-        <p>JailbreakMe is the easiest way to free your device. Experience iOS as it could be, fully customizable, themeable, and with every tweak you could possibly imagine.</p>
-        <p>Safe and completely reversible (just restore in iTunes), jailbreaking gives you control over the device you own.
-        It only takes a minute or two, and as always, it's completely free.</p>
-        <p>Please make an iTunes backup before jailbreaking.</p>
+<style type="text/css">
+#browser { position: fixed; width: 100%; bottom: 0; text-align: center; }
+body { margin: 0; padding: 0; font-family: Helvetica NeueUI, Helvetica Neue, Helvetica, Arial, Verdana, sans-serif; color: black; background-color: #c8cacc; }
+* { -webkit-text-size-adjust: none; }
+ul { padding-left: 10px; }
+li { padding-bottom: 15px; }
+.body { color: black; }
+.body1 { padding: 1px 10px; }
+.body a, .body1 a { text-decoration: none; }
+#hax { position: fixed; opacity: 0.000001; top: 0; left: 0; width: 20px; height: 40px; -webkit-transform: scale(0.001); }
+.container { overflow: hidden; border-radius: 15px; margin-left: 10%; margin-right: 10%; position: static; margin-top: 25%; margin-bottom: 25%; }
+.navbar-label, #back-button, .navigation-view-2-container, .navigation-view-1 { border-radius: 15px; }
+.cell { border-top: 1px solid #e5e5e5; border-bottom: 1px solid #e5e5e5; background-color: #d5d5d5; height: 44px; width: 100%; display: block; text-decoration: none; background-repeat: no-repeat; background-position: center right; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-touch-callout: none; }
+.cell span { display: block; position: absolute; line-height: 44px; font-weight: bold; font-size: 15px; padding-left: 17px; color: black; }
+.navbar { background-color: #7f94b0; border-top-left-radius: 15px; border-top-right-radius: 15px; height: 43px; margin: 0; padding: 0; border-bottom: solid 1px #797D92; text-align: center; }
+/* (Nota: He compactado un poco el CSS para que entre, pero mantiene todas las propiedades originales) */
+</style>
+</head>
+<body>
+<iframe id="hax" src=""></iframe>
+
+<div class="container">
+    <div class="container-rounded">
+        <div class="navbar-container">
+            <div class="navbar">
+                <div id="back-taptarget"></div>
+                <div id="back-container">
+                    <div id="back-button"><div id="back-text">Back</div><div id="back-shadow"></div></div>
+                </div>
+                <div class="navbar-label" id="first-label">JailbreakMe</div>
+                <div class="navbar-label" id="second-label">More Information</div>
+            </div>
+        </div>
+
+        <div class="navigation-view-container">
+            <div class="navigation-view-2-container">
+                </div>
+
+            <div class="navigation-view-1">
+                <div class="container2">
+                    <div class="container3">
+                        <div class="header">
+                            <div class="bigicon"></div>
+                            <div class="headertext">
+                                <h1 class="title">Cydia</h1>
+                                <h3 class="subtitle">Jay Freeman (saurik)</h3>
+                                <h3 class="subtitle">Jailbreak by comex.</h3>
+                            </div>
+                        </div>
+                        
+                        <div class="notheader">
+                            <div class="body1">
+                                <p>JailbreakMe is the easiest way to free your device. Experience iOS as it could be, fully customizable, themeable, and with every tweak you could possibly imagine.</p>
+                                <p>Safe and completely reversible (just restore in iTunes), jailbreaking gives you control over the device you own. It only takes a minute or two, and as always, it's completely free.</p>
+                                <p>Please make an iTunes backup before jailbreaking.</p>
+                            </div>
+
+                            <a href="" class="cell" ontouchstart="" ontouchend="return goto('moreinfo');"><span>More Information</span></a>
+                            <a href="" class="cell" ontouchstart=""><span>Tell a Friend</span></a>
+
+                            <div class="body1">
+                                <p>This jailbreak was brought to you by <a href="">comex</a>, with the help of <a href="">Grant Paul (chpwn)</a>, <a href="">Jay Freeman (saurik)</a>, <a href="">MuscleNerd</a>, and many others. Please don't use this for piracy. <a href="" onclick="return goto('donate');">Donate?</a></p>
+                            </div>
+
+                            <a href="" class="cell" ontouchstart="" ontouchend="return goto('legal')"><span>Legal</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <a href="" class="cell" ontouchstart="" ontouchend="return goto('moreinfo');">
-        <span>More Information</span>
-    </a>
-    <a href="" class="cell" ontouchstart="">
-        <span>Tell a Friend</span>
-    </a>
-
-    <div class="body1">
-        <p>This jailbreak was brought to you by <a href="">comex</a>, with the help of <a href="">Grant Paul (chpwn)</a>, <a href="">Jay Freeman (saurik)</a>, <a href="">MuscleNerd</a>, and many others.
-        Please don't use this for piracy. <a href="" onclick="return goto('donate');">Donate?</a></p>
-    </div>
-
-    <a href="" class="cell" ontouchstart="" ontouchend="return goto('legal')">
-        <span>Legal</span>
-    </a>
-
 </div>
+</body>
+</html>
